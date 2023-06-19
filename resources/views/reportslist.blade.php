@@ -19,7 +19,7 @@
     </div>
     <div class="p-2 d-grid">
         <div class="mb-3 d-grid col-3 mx-auto">
-            <a href="/reports/currentexpenses" class="btn btn-primary shadow-lg">Показать расходы</a>
+            <a href="{{url('/reports/currentexpenses')}}" class="btn btn-primary shadow-lg">Показать расходы</a>
         </div>
         <div class="mb-3 d-grid col-3 mx-auto">
             <a href="/reports/currentincomes" class="btn btn-primary shadow-lg">Показать доходы</a>
