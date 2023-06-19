@@ -53,7 +53,7 @@
     <div style="display: flex; justify-content: center;">
         <div style="display: flex; justify-content: center; flex-direction: column; align-items: center; padding: 10;">
             <div>
-                <form name="expense" id="expense" method="post" enctype="multipart/form-data" action="/add/expensetype">
+                <form name="expense" id="expense" method="post" enctype="multipart/form-data" action="{{url('/add/expensetype')}}">
                     @csrf
                     <input id="go" type="submit"
                            style="text-indent:-9999px;line-height:0;border:0;background:url('images/newexpensetype.png');height:150px;width:150px;cursor:pointer;float:left;"/>
@@ -65,7 +65,7 @@
         </div>
         <div style="display: flex; justify-content: center; flex-direction: column; align-items: center; padding: 10;">
             <div>
-                <form name="expense" id="expense" method="post" enctype="multipart/form-data" action="/add/incometype">
+                <form name="expense" id="expense" method="post" enctype="multipart/form-data" action="{{url('/add/incometype')}}">
                     @csrf
                     <input id="go" type="submit"
                            style="text-indent:-9999px;line-height:0;border:0;background:url('images/newincometype.png');height:150px;width:150px;cursor:pointer;float:left;"/>
