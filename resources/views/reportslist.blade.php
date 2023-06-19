@@ -22,10 +22,10 @@
             <a href="{{url('/reports/currentexpenses')}}" class="btn btn-primary shadow-lg">Показать расходы</a>
         </div>
         <div class="mb-3 d-grid col-3 mx-auto">
-            <a href="/reports/currentincomes" class="btn btn-primary shadow-lg">Показать доходы</a>
+            <a href="{{url('/reports/currentincomes')}}" class="btn btn-primary shadow-lg">Показать доходы</a>
         </div>
         <div class="mb-3 d-grid col-3 mx-auto">
-            <a href="/reports/currentbudget" class="btn btn-primary shadow-lg">Бюджет</a>
+            <a href="{{url('/reports/currentbudget')}}" class="btn btn-primary shadow-lg">Бюджет</a>
         </div>
     </div>
 </div>
