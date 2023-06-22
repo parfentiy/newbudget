@@ -1,7 +1,29 @@
-version: '3.1'
+version: '3'
 
 services:
-  php:
-    build: .
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./:/var/www/
+      - ./_docker/nginx/conf.d/:/etc/nginx/conf.d
     ports:
-      - 80:80
+      - "80:80"
+    depends_on:
+      - app
+    container_name: project_nginx
+
+  app:
+    build:
+      context: .
+      dockerfile: _docker/app/Dockerfile
+    volumes:
+      - ./:/var/www/
+    container_name: project_app
+
+  composer:
+    image: composer
+    volumes:
+      - ./:/var/www/
+    working_dir: /var/www/
+    command: composer require
+    container_name: project_composer
