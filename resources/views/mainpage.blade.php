@@ -13,7 +13,9 @@
                 </a>
             </div>
             <div>
-                <h2>Добавить расход</h2>
+                <a href="#"> 
+                    <h2>Добавить расход</h2>
+                </a>
             </div>
         </div>
         <div class="d-flex flex-column mx-2 my-2 align-items-center">
@@ -24,7 +26,9 @@
                </a>
             </div>
             <div>
-                <h2>Добавить доход</h2>
+                <a href="#"> 
+                    <h2>Добавить доход</h2>
+                </a>
             </div>
         </div>
         <div class="d-flex flex-column mx-2 my-2 align-items-center">
@@ -35,7 +39,9 @@
                 </a>
             </div>
             <div>
-                <h2>Планирование бюджета</h2>
+                <a href="#"> 
+                    <h2>Планирование бюджета</h2>
+                </a>
             </div>
         </div>
     </div>
