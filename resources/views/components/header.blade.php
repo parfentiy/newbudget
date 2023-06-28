@@ -5,23 +5,25 @@
     <script src="/bootstrap.bundle.min.js"></script>
 </head>
 
-<div class="d-flex flex-row justify-content-between">
-    <div>
-        <b>Семейный бюджет. Автор Парфентий Петр</b>
-    </div>
-    <div>
-        <b>Сегодня:
-            @php
-                $tz = 'Europe/Moscow';
-                $timestamp = time();
-                $dt = new DateTime("now", new DateTimeZone($tz)); //first argument "must" be a string
-                $dt->setTimestamp($timestamp); //adjust the object to correct timestamp
-                echo $dt->format('d.m.Y, H:i:s');
-            @endphp
-        </b>
-    </div>
-    <div>
-        <b>Версия 1.0.7</b>
+<div class="container text-center">
+    <div class="row align-items-around">
+        <div class="col">
+            <b>Семейный бюджет. Автор Парфентий Петр</b>
+        </div>
+        <div class="col">
+            <b>Сегодня:
+                @php
+                    $tz = 'Europe/Moscow';
+                    $timestamp = time();
+                    $dt = new DateTime("now", new DateTimeZone($tz)); //first argument "must" be a string
+                    $dt->setTimestamp($timestamp); //adjust the object to correct timestamp
+                    echo $dt->format('d.m.Y, H:i:s');
+                @endphp
+            </b>
+        </div>
+        <div class="col">
+            <b>Версия 1.0.7</b>
+        </div>
     </div>
 </div>
 <hr>
