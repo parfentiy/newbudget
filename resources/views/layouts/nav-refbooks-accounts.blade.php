@@ -6,7 +6,12 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('mainpage')" :active="request()->routeIs('mainpage')">
-                        {{ __('Главная') }}
+                        {{ __('Главная -> ') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('refbooks')" :active="request()->routeIs('refbooks')">
+                        {{ __('Справочники') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -62,6 +67,11 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('mainpage')" :active="request()->routeIs('mainpage')">
                 {{ __('Главная') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('refbooks')" :active="request()->routeIs('refbooks')">
+                {{ __('Справочники') }}
             </x-responsive-nav-link>
         </div>
 

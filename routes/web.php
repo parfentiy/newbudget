@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     });
+
+    Route::get('/refbooks', function () {
+        return view('refbooks');
+    })->name('refbooks');
+    Route::get('/refbooks/accounts', [AccountController::class, 'show'])->name('account.show');
+    Route::post('/refbooks/accounts/save', [AccountController::class, 'save'])->name('account.save');
+    Route::post('/refbooks/accounts/delete', [AccountController::class, 'delete'])->name('account.delete');
+
 });
 
 require __DIR__.'/auth.php';
