@@ -33,8 +33,10 @@ Route::middleware('auth')->group(function () {
         return view('refbooks');
     })->name('refbooks');
     Route::get('/refbooks/accounts', [AccountController::class, 'show'])->name('account.show');
-    Route::post('/refbooks/accounts/save', [AccountController::class, 'save'])->name('account.save');
+    Route::post('/refbooks/accounts/update', [AccountController::class, 'update'])->name('account.update');
     Route::post('/refbooks/accounts/delete', [AccountController::class, 'delete'])->name('account.delete');
+    Route::post('/refbooks/accounts/create', [AccountController::class, 'create'])->name('account.create');
+
 
 });
 

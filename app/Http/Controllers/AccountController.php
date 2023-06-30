@@ -20,11 +20,12 @@ class AccountController extends Controller
         ]);
     }
 
-    public function save() {
+    public function update() {
         //dd(request());
         $account = Account::find(request()->id);
         $account->name = request()->name;
         $account->order_number = request()->order_number;
+        $account->description = request()->description;
 
         $account->save();
 
@@ -34,6 +35,20 @@ class AccountController extends Controller
     public function delete() {
         //dd(request());
         Account::find(request()->id)->delete();
+
+        return redirect()->back();
+    }
+
+    public function create() {
+        //dump(Auth::user()->id);
+        //dd(request());
+        Account::create([
+            'name' => request()->name,
+            'order_number' => request()->order_number,
+            'user_id' => Auth::user()->id,
+            'category' => 0,
+            'description' => request()->description,
+        ]);
 
         return redirect()->back();
     }
