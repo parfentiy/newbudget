@@ -86,7 +86,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Account::factory()->create([
             'name' => 'Бухалово Марина',
-            'category' => 1,
+            'category' => 2,
             'order_number' => 3,
             'user_id' => 2,
         ]);

@@ -26,6 +26,7 @@ class AccountController extends Controller
         $account->name = request()->name;
         $account->order_number = request()->order_number;
         $account->description = request()->description;
+        $account->category = request()->category;
 
         $account->save();
 
@@ -46,7 +47,7 @@ class AccountController extends Controller
             'name' => request()->name,
             'order_number' => request()->order_number,
             'user_id' => Auth::user()->id,
-            'category' => 0,
+            'category' => request()->category,
             'description' => request()->description,
         ]);
 
