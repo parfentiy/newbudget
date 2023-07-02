@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CashFlowController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     });
+
+    Route::get('/transaction', [CashFlowController::class, 'index'])->name('transaction');
+    Route::post('/transaction/new', [CashFlowController::class, 'create'])->name('transaction.new');
+
 
     Route::get('/refbooks', function () {
         return view('refbooks');

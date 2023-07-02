@@ -11,7 +11,7 @@
 </head>
 
 <x-header/>
-@include('layouts.app-rb-accounts')
+@include('layouts.refbook-accounts')
 
 <div class="d-flex flex-row justify-content-center">
     <table class="table table-bordered table-hover table-sm caption-top w-50 text-center align-center">
@@ -104,7 +104,6 @@
                 <td>
                     <select name="category" class="form-select form-select-sm">
                         @foreach ($categories as $key => $category)
-                        <!-- <input class="form-control form-control-sm" required type="text" name="name" value="{{$subCategory->category}}"/> -->
                             @if ($subCategory->category == $category->id)
                                 <option selected value="{{$category->id}}">{{$category->name}}</option>
                             @else 

@@ -2,7 +2,7 @@
 <x-app-layout/>
 <div>
     <div class="d-flex flex-row justify-content-center">
-        Справочники
+        <h2>Справочники</h2>
     </div>
     <div class="d-flex flex-row justify-content-center">
         <div class="d-flex flex-column mx-2 my-2 align-items-center">
@@ -14,7 +14,7 @@
             </div>
             <div class="text-center">
                 <a href="/refbooks/accounts"> 
-                    <h2>Счета</h2>
+                    Счета
                 </a>
             </div>
         </div>
