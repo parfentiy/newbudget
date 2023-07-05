@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         \App\Models\User::truncate();
         \App\Models\Account::truncate();
+        \App\Models\CashFlow::truncate();
 
         \App\Models\User::factory()->create([
              'name' => 'Test User',
@@ -111,5 +112,7 @@ class DatabaseSeeder extends Seeder
             'order_number' => 3,
             'user_id' => 2,
         ]);
+
+        \App\Models\CashFlow::factory(50)->create();
     }
 }

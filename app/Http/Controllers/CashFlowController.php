@@ -36,4 +36,11 @@ class CashFlowController extends Controller
 
         return redirect()->back();
     }
+
+    public function delete() {
+        //dd(request());
+        CashFlow::find(request()->id)->delete();
+
+        return redirect()->back();
+    }
 }

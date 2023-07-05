@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CashFlowController;
+use App\Http\Controllers\ReportsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/transaction', [CashFlowController::class, 'index'])->name('transaction');
     Route::post('/transaction/new', [CashFlowController::class, 'create'])->name('transaction.new');
+    Route::post('/transaction/delete', [CashFlowController::class, 'delete'])->name('transaction.delete');
 
 
     Route::get('/refbooks', function () {
@@ -42,6 +44,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/refbooks/accounts/delete', [AccountController::class, 'delete'])->name('account.delete');
     Route::post('/refbooks/accounts/create', [AccountController::class, 'create'])->name('account.create');
 
+    Route::get('/reports', function () {
+        return view('reports.reports-list');
+    })->name('reports.list');
+    Route::get('/reports/transactions', [ReportsController::class, 'showTransactions'])->name('reports.transactions');
 
 });
 

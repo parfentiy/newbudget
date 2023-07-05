@@ -16,8 +16,16 @@ class CashFlowFactory extends Factory
      */
     public function definition(): array
     {
+        $accounts = \App\Models\Account::where('category', "!=", '0')->pluck('id');
+        $users = \App\Models\User::pluck('id');
         return [
             //
+            'amount' => fake()->numberBetween(100, 5000),
+            'source_account_id' => fake()->randomElement($accounts),
+            'dest_account_id' => fake()->randomElement($accounts),
+            'operation_date' => fake()->date($format = 'Y-m-d', $max = 'now'),
+            'user_id' => fake()->randomElement($users),
+            'description' => fake()->sentence(),
         ];
     }
 }
