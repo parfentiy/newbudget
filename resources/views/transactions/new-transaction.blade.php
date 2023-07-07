@@ -15,6 +15,9 @@
     <div class="d-flex flex-row justify-content-center mb-7">
         <h2>Новая проводка</h2>
     </div>
+
+
+
     <form method="POST" action="{{ route('transaction.new') }}">
         @csrf
 

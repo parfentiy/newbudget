@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
         return view('reports.reports-list');
     })->name('reports.list');
     Route::get('/reports/transactions', [ReportsController::class, 'showTransactions'])->name('reports.transactions');
+    Route::post('/reports/transactions', [ReportsController::class, 'showTransactions'])->name('post.reports.transactions');
 
 });
 
