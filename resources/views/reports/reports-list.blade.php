@@ -19,7 +19,7 @@
     </div>
     <div class="p-2 d-grid">
         <div class="mb-3 d-grid col-3 mx-auto">
-            <a href="{{url('/reports/transactions')}}" class="btn btn-primary shadow-lg">Показать расходы</a>
+            <a href="{{url('/reports/transactions')}}" class="btn btn-primary shadow-lg">Журнал проводок</a>
         </div>
         <div class="mb-3 d-grid col-3 mx-auto">
             <a href="#" class="btn btn-primary shadow-lg"></a>

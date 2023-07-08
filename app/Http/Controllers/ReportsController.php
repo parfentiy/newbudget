@@ -9,11 +9,23 @@ use Illuminate\Support\Facades\DB;
 class ReportsController extends Controller
 {
     //
+    public $sortItems = [
+        'noSort' => 'Без сортировки',
+        'operation_date' => 'Дата операции',
+        'source_account_id' => 'Счет источник',
+        'dest_account_id' => 'Счет зачисления',
+        'amount' => 'Сумма',
+    ];
+
+    public $sortType = [
+        'asc' => 'А -> Я',
+        'desc' => 'Я -> А',
+    ];
+
     public function showTransactions(Request $request) {
-        //dump($request);
+        //dump(request());
         if (!$request->filled('is_set')) {
             if (!$request->is_set) {
-                //dump('request is empty');
                 $source_accs = \App\Models\CashFlow::where('user_id', Auth::user()->id)
                     ->groupBy('source_account_id')
                     ->pluck('source_account_id');
@@ -26,14 +38,13 @@ class ReportsController extends Controller
                 $amount_min = null;
                 $amount_max = null;
 
-                $transactions = \App\Models\CashFlow::where('user_id', Auth::user()->id)
-                    ->orderBy('operation_date')
-                    ->get();
+                $transactions = \App\Models\CashFlow::where('user_id', Auth::user()->id)->get();
+                $amount_sum = \App\Models\CashFlow::where('user_id', Auth::user()->id)
+                    ->pluck('amount')
+                    ->sum();
             } 
         } else {
-            //dump($request);
 
-            //dump('request is  not empty');
             if ($request->is_set) {
                 $source_accs = $request->source_accs ?? 
                     \App\Models\CashFlow::where('user_id', Auth::user()->id)
@@ -47,8 +58,6 @@ class ReportsController extends Controller
                 
 
                 $query = \App\Models\CashFlow::where('user_id', Auth::user()->id);
-                //$req = "where('user_id', Auth::user()->id)";
-                //dd($request->filtersSet['amount_min']);
                 $date_start = $request->date_start;
                 $date_end = $request->date_end;
                 $amount_min = $request->amount_min;
@@ -59,10 +68,12 @@ class ReportsController extends Controller
                 if (!is_null($amount_max)) $query->where('amount', '<=', $amount_max);
                 $query->whereIn('source_account_id', $source_accs);
                 $query->whereIn('dest_account_id', $dest_accs);
+                //dump(is_null($sort_item));
+                $query->orderBy(isset(request()->sort_item) ? request()->sort_item : '', isset(request()->sort_type) ? request()->sort_type : 'asc');
+                //$query->orderBy('amount', 'asc');
 
-                
-                //dd($req);
-                $transactions = $query->orderBy('operation_date')->get();
+                $transactions = $query->get();
+                $amount_sum = $query->pluck('amount')->sum();
     
             } else {
                 $source_accs = \App\Models\CashFlow::where('user_id', Auth::user()->id)
@@ -77,21 +88,12 @@ class ReportsController extends Controller
                 $amount_min = null;
                 $amount_max = null;
 
-                $transactions = \App\Models\CashFlow::where('user_id', Auth::user()->id)
-
-                    ->orderBy('operation_date')
-                    ->get();
+                $transactions = \App\Models\CashFlow::where('user_id', Auth::user()->id)->get();
+                $amount_sum = \App\Models\CashFlow::where('user_id', Auth::user()->id)
+                    ->pluck('amount')
+                    ->sum();
             }
-            //dump($filtersSet);
-            /*dump($date_start);
-            dump($date_end);
-            dump($amount_min);
-            dump($amount_max);
-            dump($source_accs);
-            dump($dest_accs);*/
         }
-        //dd($dest_accs);
-
 
         return view('reports.transactions', [
             'transactions' => $transactions,
@@ -102,6 +104,11 @@ class ReportsController extends Controller
             'amount_max' => $amount_max,
             'date_start' => $date_start,
             'date_end' => $date_end,
+            'amount_sum' => $amount_sum,
+            'sort_items' => $this->sortItems,
+            'sort_types' => $this->sortType,
+            'sort_item' => request()->sort_item,
+            'sort_type' => request()->sort_type,
         ]);
     }
 }
