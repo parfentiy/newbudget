@@ -13,20 +13,20 @@
                </a>
             </div>
             <div class="text-center">
-                <a href="/transaction"> 
+                <a href="/transaction">
                     Добавить проводку
                 </a>
             </div>
         </div>
         <div class="d-flex flex-column mx-2 my-2 align-items-center">
             <div>
-                <a href="#">
+                <a href="/budget-planning">
                     <img src="images/planbudget.jpg"
                         style="text-indent:-9999px;line-height:0;border:0;height:100px;width:100px;cursor:pointer;float:center;"/>
                 </a>
             </div>
             <div class="text-center">
-                <a href="#"> 
+                <a href="/budget-planning">
                     Планирование бюджета
                 </a>
             </div>
@@ -35,26 +35,26 @@
     <div class="d-flex flex-row justify-content-center">
         <div class="d-flex flex-column mx-2 my-2 align-items-center">
             <div>
-                <a href="/refbooks"> 
+                <a href="/refbooks">
                     <img src="images/newexpense.jpg"
                         style="text-indent:-9999px;line-height:0;border:0;height:100px;width:100px;cursor:pointer;float:left;">
                 </a>
             </div>
             <div class="text-center">
-                <a href="/refbooks"> 
+                <a href="/refbooks">
                     Справочники
                 </a>
             </div>
         </div>
         <div class="d-flex flex-column mx-2 my-2 align-items-center">
             <div>
-                <a href="/reports"> 
+                <a href="/reports">
                     <img src="images/newexpense.jpg"
                         style="text-indent:-9999px;line-height:0;border:0;height:100px;width:100px;cursor:pointer;float:left;">
                 </a>
             </div>
             <div class="text-center">
-                <a href="/reports"> 
+                <a href="/reports">
                     Отчеты
                 </a>
             </div>

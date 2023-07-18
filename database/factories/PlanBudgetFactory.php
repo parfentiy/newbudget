@@ -2,7 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Account;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PlanBudget>
@@ -16,8 +19,24 @@ class PlanBudgetFactory extends Factory
      */
     public function definition(): array
     {
+        $categories = Account::where('user_id', 2)->where('category', '!=', '0')->pluck('id');
+
+        for ($i = 1; $i <= 25; $i++) {
+            $dataset[] = [
+                'account' => fake()->randomElement($categories),
+                'sum' => fake()->numberBetween(100, 15000),
+                'order' => $i,
+            ];
+        }
+
+        //Log::info(json_encode($dataset));
         return [
             //
+            'month' => fake()->numberBetween(1,12),
+            'year' => fake()->numberBetween(2021, 2024),
+            'user_id' => 2,
+            'description' => fake()->sentence,
+            'dataset' => json_encode($dataset),
         ];
     }
 }

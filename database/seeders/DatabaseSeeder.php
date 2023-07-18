@@ -114,5 +114,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\CashFlow::factory(50)->create();
+        \App\Models\PlanBudget::factory(10)->create();
     }
 }

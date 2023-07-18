@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CashFlowController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\PlanBudgetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,6 +50,20 @@ Route::middleware('auth')->group(function () {
     })->name('reports.list');
     Route::get('/reports/transactions', [ReportsController::class, 'showTransactions'])->name('reports.transactions');
     Route::post('/reports/transactions', [ReportsController::class, 'showTransactions'])->name('post.reports.transactions');
+
+    Route::get('/budget-planning', [PlanBudgetController::class, 'index']);
+    Route::post('/budget-planning', [PlanBudgetController::class, 'index']);
+    Route::post('/budget-planning/add', [PlanBudgetController::class, 'add'])->name('planbudget.add');
+    Route::post('/budget-planning/edit', [PlanBudgetController::class, 'index'])->name('planbudget.edit');
+    Route::get('/budget-planning/edit', [PlanBudgetController::class, 'index']);
+
+    Route::post('/budget-planning/add-item', [PlanBudgetController::class, 'addItem'])->name('planbudget.addItem');
+    Route::get('/budget-planning/add-item', [PlanBudgetController::class, 'addItem']);
+
+    Route::post('/budget-planning/delete-item', [PlanBudgetController::class, 'deleteItem'])->name('planbudget.deleteItem');
+    Route::get('/budget-planning/delete-item', [PlanBudgetController::class, 'deleteItem']);
+
+
 
 });
 
