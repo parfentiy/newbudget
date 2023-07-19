@@ -132,7 +132,7 @@ class ReportsController extends Controller
     private function getClosestBudget() {
         $currentMonth=(int)date("m",strtotime(now()));
         $currentYear=(int)date("Y",strtotime(now()));
-        $futureBudgets = PlanBudget::orderBy('year')->orderBy('month')->get();
+        $futureBudgets = PlanBudget::where('user_id', Auth::user()->id)->orderBy('year')->orderBy('month')->get();
 
         $closestBudget = 0;
         $lastDiff = 1000000000;
