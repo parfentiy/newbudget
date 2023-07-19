@@ -12,7 +12,6 @@ class AccountController extends Controller
     public function show() {
         $categories = Account::where('user_id', Auth::user()->id)->where('category', 0)->get();
         $subCategories = Account::where('user_id', Auth::user()->id)->where('category', '!=', 0)->get();
-        //dd($subCategories);
 
         return view('categories.show', [
             'categories' => $categories,
@@ -21,7 +20,6 @@ class AccountController extends Controller
     }
 
     public function update() {
-        //dd(request());
         $account = Account::find(request()->id);
         $account->name = request()->name;
         $account->order_number = request()->order_number;
@@ -34,15 +32,12 @@ class AccountController extends Controller
     }
 
     public function delete() {
-        //dd(request());
         Account::find(request()->id)->delete();
 
         return redirect()->back();
     }
 
     public function create() {
-        //dump(Auth::user()->id);
-        //dd(request());
         Account::create([
             'name' => request()->name,
             'order_number' => request()->order_number,

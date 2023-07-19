@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PlanBudget;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ReportsController extends Controller
 {
@@ -42,20 +44,20 @@ class ReportsController extends Controller
                 $amount_sum = \App\Models\CashFlow::where('user_id', Auth::user()->id)
                     ->pluck('amount')
                     ->sum();
-            } 
+            }
         } else {
 
             if ($request->is_set) {
-                $source_accs = $request->source_accs ?? 
+                $source_accs = $request->source_accs ??
                     \App\Models\CashFlow::where('user_id', Auth::user()->id)
                         ->groupBy('source_account_id')
                         ->pluck('source_account_id');
-                $dest_accs = $request->dest_accs ?? 
+                $dest_accs = $request->dest_accs ??
                     \App\Models\CashFlow::where('user_id', Auth::user()->id)
                         ->groupBy('dest_account_id')
                         ->pluck('dest_account_id');
                 $is_set = true;
-                
+
 
                 $query = \App\Models\CashFlow::where('user_id', Auth::user()->id);
                 $date_start = $request->date_start;
@@ -74,7 +76,7 @@ class ReportsController extends Controller
 
                 $transactions = $query->get();
                 $amount_sum = $query->pluck('amount')->sum();
-    
+
             } else {
                 $source_accs = \App\Models\CashFlow::where('user_id', Auth::user()->id)
                     ->groupBy('source_account_id')
@@ -110,5 +112,42 @@ class ReportsController extends Controller
             'sort_item' => request()->sort_item,
             'sort_type' => request()->sort_type,
         ]);
+    }
+
+    public function showBudgets() {
+        if (!isset(request()->budgetId)) {
+            $budgetId = $this->getClosestBudget();
+
+            return view('reports.budgets', [
+                'budgetId' => $budgetId,
+            ]);
+        } else {
+
+            return view('reports.budgets', [
+                'budgetId' => request()->budgetId,
+            ]);
+        }
+    }
+
+    private function getClosestBudget() {
+        $currentMonth=(int)date("m",strtotime(now()));
+        $currentYear=(int)date("Y",strtotime(now()));
+        $futureBudgets = PlanBudget::orderBy('year')->orderBy('month')->get();
+
+        $closestBudget = 0;
+        $lastDiff = 1000000000;
+        foreach ($futureBudgets as $key => $futureBudget) {
+            $datetime1 = date_create($currentYear . '-' . $currentMonth . '-01');
+            $datetime2 = date_create($futureBudget->year . '-' . $futureBudget->month . '-01');
+
+            $interval = date_diff($datetime1, $datetime2);
+            $diffMonths = $interval->y * 12 + $interval->m;
+            if ($diffMonths < $lastDiff) {
+                $closestBudget = $futureBudget->id;
+                $lastDiff = $diffMonths;
+            }
+        }
+
+        return $closestBudget;
     }
 }

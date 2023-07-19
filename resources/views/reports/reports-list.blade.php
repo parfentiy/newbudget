@@ -22,7 +22,7 @@
             <a href="{{url('/reports/transactions')}}" class="btn btn-primary shadow-lg">Журнал проводок</a>
         </div>
         <div class="mb-3 d-grid col-3 mx-auto">
-            <a href="#" class="btn btn-primary shadow-lg"></a>
+            <a href="{{route('reports.budgets')}}" class="btn btn-primary shadow-lg" class="btn btn-primary shadow-lg">Бюджеты</a>
         </div>
         <div class="mb-3 d-grid col-3 mx-auto">
             <a href="#" class="btn btn-primary shadow-lg"></a>

@@ -10,84 +10,33 @@ class PlanBudgetController extends Controller
 {
     //
     public function index() {
-        //dd(request());
         if (isset(request()->delete)) {
-            $this->delete(request()->delete);
-        }
-        $planBudgets = PlanBudget::where('user_id', Auth::user()->id)->get();
+            PlanBudget::whereId(request()->delete)->delete();
 
-        if (is_null(request()->isSet)) {
-            $currentBudget = [];
-            $isCurrentBudgetSet = false;
-            $budgetItems = [];
-
-            //dump($currentBudget);
+            return view('planbudget');
         } else {
-            $currentBudget = PlanBudget::whereId(request()->budgetId)->first();
 
-            $budgetItems = json_decode(PlanBudget::whereId(request()->budgetId)->pluck('dataset')->first(), true);
-            //dd($currentBudget);
-            usort($budgetItems, function ($a, $b) {
-                return $a['order'] <=> $b['order'];
-            });
-            //dd($budgetItems);
-            $isCurrentBudgetSet = true;
+            return view('planbudget', [
+                'budgetId' => request()->budgetId,
+            ]);
         }
-        return view('planbudget', [
-            'planBudgets' => $planBudgets,
-            'currentBudget' => $currentBudget,
-            'currentBudgetItems' => $budgetItems,
-            'isCurrentBudgetSet' => $isCurrentBudgetSet,
-        ]);
-        //dd(request());
     }
 
     public function add() {
-        //dd(request());
-
-        PlanBudget::create([
+        $newBudget = PlanBudget::create([
             'month' => request()->month,
             'year' => request()->year,
             'user_id' => Auth::user()->id,
             'dataset' => json_encode([]),
-
         ]);
 
-        $planBudgets = PlanBudget::where('user_id', Auth::user()->id)->get();
-        $currentBudget = [];
-        $isCurrentBudgetSet = false;
-        $budgetItems = [];
-
         return view('planbudget', [
-            'planBudgets' => $planBudgets,
-            'currentBudget' => $currentBudget,
-            'currentBudgetItems' => $budgetItems,
-            'isCurrentBudgetSet' => $isCurrentBudgetSet,
-        ]);
-    }
-
-    public function delete($id) {
-        //dd($id);
-        PlanBudget::whereId($id)->delete();
-
-        $planBudgets = PlanBudget::where('user_id', Auth::user()->id)->get();
-        $currentBudget = [];
-        $isCurrentBudgetSet = false;
-        $budgetItems = [];
-
-        return view('planbudget', [
-            'planBudgets' => $planBudgets,
-            'currentBudget' => $currentBudget,
-            'currentBudgetItems' => $budgetItems,
-            'isCurrentBudgetSet' => $isCurrentBudgetSet,
+            'budgetId' => $newBudget->id,
         ]);
     }
 
     public function addItem() {
-        //dd(request());
         $budget = PlanBudget::where('id', request()->currentBudget)->first();
-        //dd($budget->dataset);
-        $array = [];
         foreach (json_decode($budget->dataset, true) as $item) {
             $array[] = $item;
         }
@@ -100,52 +49,35 @@ class PlanBudgetController extends Controller
         $budget->dataset = $array;
         $budget->save();
 
-        $planBudgets = PlanBudget::where('user_id', Auth::user()->id)->get();
-        $currentBudget = PlanBudget::where('id', request()->currentBudget)->first();
-        $budgetItems = json_decode(PlanBudget::whereId(request()->currentBudget)->pluck('dataset')->first(), true);
-        usort($budgetItems, function ($a, $b) {
-            return $a['order'] <=> $b['order'];
-        });
-        $isCurrentBudgetSet = true;
-
         return view('planbudget', [
-            'planBudgets' => $planBudgets,
-            'currentBudget' => $currentBudget,
-            'currentBudgetItems' => $budgetItems,
-            'isCurrentBudgetSet' => $isCurrentBudgetSet,
+            'budgetId' => $budget->id,
         ]);
     }
 
     public function deleteItem() {
-        //dd(request());
-        $currentBudget = PlanBudget::where('id', request()->currentBudget)->first();
-
-        //dd($currentBudget->dataset);
-        $array = [];
-        foreach (json_decode($currentBudget->dataset, true) as $item) {
-            //dump($item['order']);
+        $budget = PlanBudget::where('id', request()->currentBudget)->first();
+        foreach (json_decode($budget->dataset, true) as $item) {
             if ($item['order'] != request()->id) {
                 $array[] = $item;
             }
         }
 
-        $currentBudget->dataset = $array;
-        $currentBudget->save();
-        //dd($array);
-
-        $planBudgets = PlanBudget::where('user_id', Auth::user()->id)->get();
-        $currentBudget = PlanBudget::where('id', request()->currentBudget)->first();
-        $budgetItems = json_decode(PlanBudget::whereId(request()->currentBudget)->pluck('dataset')->first(), true);
-        usort($budgetItems, function ($a, $b) {
-            return $a['order'] <=> $b['order'];
-        });
-        $isCurrentBudgetSet = true;
+        $budget->dataset = $array;
+        $budget->save();
 
         return view('planbudget', [
-            'planBudgets' => $planBudgets,
-            'currentBudget' => $currentBudget,
-            'currentBudgetItems' => $budgetItems,
-            'isCurrentBudgetSet' => $isCurrentBudgetSet,
+            'budgetId' => $budget->id,
+        ]);
+    }
+
+    public function saveDescription() {
+        $budget = PlanBudget::where('id', request()->currentBudget)->first();
+
+        $budget->description = request()->description;
+        $budget->save();
+
+        return view('planbudget', [
+            'budgetId' => request()->currentBudget,
         ]);
     }
 }

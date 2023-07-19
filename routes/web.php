@@ -50,6 +50,8 @@ Route::middleware('auth')->group(function () {
     })->name('reports.list');
     Route::get('/reports/transactions', [ReportsController::class, 'showTransactions'])->name('reports.transactions');
     Route::post('/reports/transactions', [ReportsController::class, 'showTransactions'])->name('post.reports.transactions');
+    Route::get('/reports/budgets', [ReportsController::class, 'showBudgets'])->name('reports.budgets');
+    Route::post('/reports/budgets', [ReportsController::class, 'showBudgets'])->name('post.reports.budgets');
 
     Route::get('/budget-planning', [PlanBudgetController::class, 'index']);
     Route::post('/budget-planning', [PlanBudgetController::class, 'index']);
@@ -63,6 +65,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/budget-planning/delete-item', [PlanBudgetController::class, 'deleteItem'])->name('planbudget.deleteItem');
     Route::get('/budget-planning/delete-item', [PlanBudgetController::class, 'deleteItem']);
 
+    Route::post('/budget-planning/save-description', [PlanBudgetController::class, 'saveDescription'])
+        ->name('planbudget.addDescription');
 
 
 });
