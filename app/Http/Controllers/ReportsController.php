@@ -115,11 +115,13 @@ class ReportsController extends Controller
     }
 
     public function showBudgets() {
+        if  (is_null(PlanBudget::where('user_id', Auth::user()->id)->first())) {
+            return redirect()->back();
+        }
         if (!isset(request()->budgetId)) {
-            $budgetId = $this->getClosestBudget();
 
             return view('reports.budgets', [
-                'budgetId' => $budgetId,
+                'budgetId' => $this->getClosestBudget(),
             ]);
         } else {
 
