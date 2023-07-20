@@ -25,85 +25,59 @@ class ReportsController extends Controller
     ];
 
     public function showTransactions(Request $request) {
-        //dump(request());
-        if (!$request->filled('is_set')) {
-            //if (!$request->is_set) {
-                $source_accs = \App\Models\CashFlow::where('user_id', Auth::user()->id)
+        if ($request->filled('is_set') && $request->is_set) {
+            $source_accs = $request->source_accs ??
+                \App\Models\CashFlow::where('user_id', Auth::user()->id)
                     ->groupBy('source_account_id')
                     ->pluck('source_account_id');
-                $dest_accs = \App\Models\CashFlow::where('user_id', Auth::user()->id)
+            $dest_accs = $request->dest_accs ??
+                \App\Models\CashFlow::where('user_id', Auth::user()->id)
                     ->groupBy('dest_account_id')
                     ->pluck('dest_account_id');
-                $is_set = false;
-                $date_start = now();
-                $date_end = now();
-                $amount_min = null;
-                $amount_max = null;
 
-                $transactions = \App\Models\CashFlow::where('user_id', Auth::user()->id)->get();
-                $amount_sum = \App\Models\CashFlow::where('user_id', Auth::user()->id)
-                    ->pluck('amount')
-                    ->sum();
-            //}
-        } else {
+            $is_set = true;
 
-            if ($request->is_set) {
-                $source_accs = $request->source_accs ??
-                    \App\Models\CashFlow::where('user_id', Auth::user()->id)
-                        ->groupBy('source_account_id')
-                        ->pluck('source_account_id');
-                $dest_accs = $request->dest_accs ??
-                    \App\Models\CashFlow::where('user_id', Auth::user()->id)
-                        ->groupBy('dest_account_id')
-                        ->pluck('dest_account_id');
-                $is_set = true;
+            $query = \App\Models\CashFlow::where('user_id', Auth::user()->id);
 
-
-                $query = \App\Models\CashFlow::where('user_id', Auth::user()->id);
-
-                if ($request->action === 'filterOnMonth') {
-                    $month=(int)date("m", strtotime(now()));
-                    $year=(int)date("Y", strtotime(now()));
-                    $date_start = date('Y-m-d',strtotime($month . '/1/' . $year));
-                    $date_end = date('Y-m-d',
-                        strtotime($month . '/' . cal_days_in_month(CAL_GREGORIAN, $month, $year). '/'. $year));
-                } else {
-                    $date_start = $request->date_start;
-                    $date_end = $request->date_end;
-                }
-                $amount_min = $request->amount_min;
-                $amount_max = $request->amount_max;
-                if (!is_null($date_start)) $query->whereDate('operation_date', '>=', date($date_start));
-                if (!is_null($date_end)) $query->whereDate('operation_date', '<=', date($date_end));
-                if (!is_null($amount_min)) $query->where('amount', '>=', $amount_min);
-                if (!is_null($amount_max)) $query->where('amount', '<=', $amount_max);
-                $query->whereIn('source_account_id', $source_accs);
-                $query->whereIn('dest_account_id', $dest_accs);
-                //dump(is_null($sort_item));
-                $query->orderBy(isset(request()->sort_item) ? request()->sort_item : '', isset(request()->sort_type) ? request()->sort_type : 'asc');
-                //$query->orderBy('amount', 'asc');
-
-                $transactions = $query->get();
-                $amount_sum = $query->pluck('amount')->sum();
-
+            if ($request->action === 'filterOnMonth') {
+                $month = (int)date("m", strtotime(now()));
+                $year = (int)date("Y", strtotime(now()));
+                $date_start = date('Y-m-d', strtotime($month . '/1/' . $year));
+                $date_end = date('Y-m-d',
+                    strtotime($month . '/' . cal_days_in_month(CAL_GREGORIAN, $month, $year) . '/' . $year));
             } else {
-                $source_accs = \App\Models\CashFlow::where('user_id', Auth::user()->id)
-                    ->groupBy('source_account_id')
-                    ->pluck('source_account_id');
-                $dest_accs = \App\Models\CashFlow::where('user_id', Auth::user()->id)
-                    ->groupBy('dest_account_id')
-                    ->pluck('dest_account_id');
-                $is_set = false;
-                $date_start = now();
-                $date_end = now();
-                $amount_min = null;
-                $amount_max = null;
-
-                $transactions = \App\Models\CashFlow::where('user_id', Auth::user()->id)->get();
-                $amount_sum = \App\Models\CashFlow::where('user_id', Auth::user()->id)
-                    ->pluck('amount')
-                    ->sum();
+                $date_start = $request->date_start;
+                $date_end = $request->date_end;
             }
+            $amount_min = $request->amount_min;
+            $amount_max = $request->amount_max;
+            if (!is_null($date_start)) $query->whereDate('operation_date', '>=', date($date_start));
+            if (!is_null($date_end)) $query->whereDate('operation_date', '<=', date($date_end));
+            if (!is_null($amount_min)) $query->where('amount', '>=', $amount_min);
+            if (!is_null($amount_max)) $query->where('amount', '<=', $amount_max);
+            $query->whereIn('source_account_id', $source_accs);
+            $query->whereIn('dest_account_id', $dest_accs);
+            $query->orderBy(isset(request()->sort_item) ? request()->sort_item : '', isset(request()->sort_type) ? request()->sort_type : 'asc');
+
+            $transactions = $query->get();
+            $amount_sum = $query->pluck('amount')->sum();
+        } else {
+            $source_accs = \App\Models\CashFlow::where('user_id', Auth::user()->id)
+                ->groupBy('source_account_id')
+                ->pluck('source_account_id');
+            $dest_accs = \App\Models\CashFlow::where('user_id', Auth::user()->id)
+                ->groupBy('dest_account_id')
+                ->pluck('dest_account_id');
+            $is_set = false;
+            $date_start = now();
+            $date_end = now();
+            $amount_min = null;
+            $amount_max = null;
+
+            $transactions = \App\Models\CashFlow::where('user_id', Auth::user()->id)->get();
+            $amount_sum = \App\Models\CashFlow::where('user_id', Auth::user()->id)
+                ->pluck('amount')
+                ->sum();
         }
 
         return view('reports.transactions', [
