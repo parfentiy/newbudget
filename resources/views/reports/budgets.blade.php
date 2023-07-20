@@ -106,24 +106,27 @@
                             @endphp
                             <tr>
                                 <input type="hidden" name="id" value="{{$item['order']}}">
-                                <td  class="text-center">
+                                <td class="text-center">
                                     {{$item['order']}}
                                 </td>
                                 <td>
                                     {{\App\Models\Account::find($item['account'])->name}}
                                 </td>
-                                <td class="text-center">
+                                <td class="text-right">
                                     {{$item['sum']}} р.
                                 </td>
-                                <td class="text-center">
+                                <td class="text-right">
                                     {{$wasted}} р.
                                 </td>
                                 @if ($item['sum'] - $wasted < 0)
-                                    <td class="text-danger fw-bold">
+                                    <td class="text-right text-danger fw-bold">
                                         {{$item['sum'] - $wasted}} р.
                                     </td>
+                                @elseif ($item['sum'] - $wasted == 0)
+                                    <td class="text-right text-danger fw-bold">
+                                    </td>
                                 @else
-                                    <td>
+                                    <td class="text-right">
                                         {{$item['sum'] - $wasted}} р.
                                     </td>
                                 @endif
@@ -139,16 +142,16 @@
                                 <td>
 
                                 </td>
-                                <td class="fw-bold">
+                                <td class="text-left fw-bold">
                                     ИТОГО:
                                 </td>
-                                <td class="fw-bold">
+                                <td class="text-right fw-bold">
                                     {{$totalPlan}} р.
                                 </td>
-                                <td class="fw-bold">
+                                <td class="text-right fw-bold">
                                     {{$totalWasted}} р.
                                 </td>
-                                <td class="fw-bold">
+                                <td class="text-right fw-bold">
                                     {{$totalPlan - $totalWasted}} р.
                                 </td>
                             </tr>
@@ -182,7 +185,7 @@
                                 <td>
                                     {{\App\Models\Account::find($item['source_account_id'])->name}}
                                 </td>
-                                <td class="text-center">
+                                <td class="text-right">
                                     {{$item['amount']}} р.
                                 </td>
                             </tr>
@@ -210,15 +213,15 @@
                 <table class="table table-bordered table-striped table-hover table-sm align-top">
                     <tr>
                         <td>Общий доход</td>
-                        <td>{{$total}} р.</td>
+                        <td class="text-right">{{$total}} р.</td>
                     </tr>
                     <tr>
                         <td>Расход</td>
-                        <td>{{$totalWasted}} р.</td>
+                        <td class="text-right">{{$totalWasted}} р.</td>
                     </tr>
                     <tr>
                         <td>Остаток по плану</td>
-                        <td>{{$total - $totalWasted}} р.</td>
+                        <td class="text-right">{{$total - $totalWasted}} р.</td>
                     </tr>
                 </table>
             </div>
