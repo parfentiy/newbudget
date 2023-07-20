@@ -24,7 +24,14 @@ class PlanBudgetFactory extends Factory
         for ($i = 1; $i <= 25; $i++) {
             $dataset[] = [
                 'account' => fake()->randomElement($categories),
-                'sum' => fake()->numberBetween(100, 15000),
+                'order' => $i,
+            ];
+        }
+
+        for ($i = 1; $i <= 10; $i++) {
+            $incomes[] = [
+                'account' => fake()->randomElement($categories),
+                'sum' => fake()->numberBetween(3000, 10000),
                 'order' => $i,
             ];
         }
@@ -33,10 +40,11 @@ class PlanBudgetFactory extends Factory
         return [
             //
             'month' => fake()->numberBetween(1,12),
-            'year' => fake()->numberBetween(2021, 2024),
+            'year' => fake()->numberBetween(2023, 2024),
             'user_id' => 2,
             'description' => fake()->sentence,
             'dataset' => json_encode($dataset),
+            'incomes' => json_encode($incomes),
         ];
     }
 }

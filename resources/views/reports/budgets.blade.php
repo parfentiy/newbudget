@@ -21,10 +21,20 @@
     if(isset($budgetId)) {
         $currentBudget = \App\Models\PlanBudget::whereId($budgetId)->first();
         $currentBudgetItems = json_decode(\App\Models\PlanBudget::whereId($budgetId)->pluck('dataset')->first(), true);
+        foreach (json_decode(\App\Models\PlanBudget::whereId($budgetId)->pluck('incomes')->first(), true) as $item) {
+            $currentIncomeAccounts[] = $item['account'];
+        }
+        $currentBudgetIncomes = \App\Models\CashFlow::where('user_id', Auth::user()->id)
+                                        ->whereIn('source_account_id', $currentIncomeAccounts)
+                                        ->whereMonth('operation_date', $currentBudget['month'])
+                                        ->whereYear('operation_date', $currentBudget['year'])
+                                        ->get();
+
         usort($currentBudgetItems, function ($a, $b) {
             return $a['order'] <=> $b['order'];
         });
     }
+    //dd($currentBudgetIncomes);
 @endphp
 
 <div>
@@ -149,6 +159,69 @@
             </div>
         </div>
         <div class="d-flex flex-column mx-2 my-2 align-items-center">
+            <div class="d-flex flex-row text-center fw-bold">
+                @if (isset($budgetId))
+                    Текущие доходы
+                @endif
+            </div>
+            <div>
+                @if (isset($budgetId))
+                    <table class="table table-bordered table-striped table-hover table-sm align-top">
+                        <thead>
+                        <tr>
+                            <th scope="col">Статья</th>
+                            <th scope="col">Сумма</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @php
+                            $total = 0;
+                        @endphp
+                        @foreach($currentBudgetIncomes as $item)
+                            <tr>
+                                <td>
+                                    {{\App\Models\Account::find($item['source_account_id'])->name}}
+                                </td>
+                                <td class="text-center">
+                                    {{$item['amount']}} р.
+                                </td>
+                            </tr>
+                            @php
+                                $total += $item['amount'];
+                            @endphp
+                        @endforeach
+                        </tbody>
+                        <tfoot>
+                        <tr class="fw-bold">
+                            <td class="fw-bold">
+                                ИТОГО:
+                            </td>
+                            <td class="fw-bold">
+                                {{$total}} р.
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+
+                @endif
+            </div>
+            <div>
+                <h4>Баланс</h4>
+                <table class="table table-bordered table-striped table-hover table-sm align-top">
+                    <tr>
+                        <td>Общий доход</td>
+                        <td>{{$total}} р.</td>
+                    </tr>
+                    <tr>
+                        <td>Расход</td>
+                        <td>{{$totalWasted}} р.</td>
+                    </tr>
+                    <tr>
+                        <td>Остаток по плану</td>
+                        <td>{{$total - $totalWasted}} р.</td>
+                    </tr>
+                </table>
+            </div>
 
         </div>
         <div class="d-flex flex-column mx-2 my-2 align-items-center">

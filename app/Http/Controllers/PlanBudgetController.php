@@ -28,6 +28,7 @@ class PlanBudgetController extends Controller
             'year' => request()->year,
             'user_id' => Auth::user()->id,
             'dataset' => json_encode([]),
+            'incomes' => json_encode([]),
         ]);
 
         return view('planbudget', [
@@ -78,6 +79,40 @@ class PlanBudgetController extends Controller
 
         return view('planbudget', [
             'budgetId' => request()->currentBudget,
+        ]);
+    }
+
+    public function addIncome() {
+        $budget = PlanBudget::where('id', request()->currentBudget)->first();
+        foreach (json_decode($budget->incomes, true) as $item) {
+            $array[] = $item;
+        }
+        $array[] = [
+            'account' => (int) request()->account_id,
+            'order' => (int) request()->order,
+        ];
+
+        $budget->incomes = $array;
+        $budget->save();
+
+        return view('planbudget', [
+            'budgetId' => $budget->id,
+        ]);
+    }
+
+    public function deleteIncome() {
+        $budget = PlanBudget::where('id', request()->currentBudget)->first();
+        foreach (json_decode($budget->incomes, true) as $item) {
+            if ($item['order'] != request()->id) {
+                $array[] = $item;
+            }
+        }
+
+        $budget->incomes = $array;
+        $budget->save();
+
+        return view('planbudget', [
+            'budgetId' => $budget->id,
         ]);
     }
 }

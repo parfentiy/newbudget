@@ -8,9 +8,12 @@
     if(isset($budgetId)) {
         $currentBudget = \App\Models\PlanBudget::whereId($budgetId)->first();
         $currentBudgetItems = json_decode(\App\Models\PlanBudget::whereId($budgetId)->pluck('dataset')->first(), true);
+        $currentBudgetIncomes = json_decode(\App\Models\PlanBudget::whereId($budgetId)->pluck('incomes')->first(), true);
+
         usort($currentBudgetItems, function ($a, $b) {
             return $a['order'] <=> $b['order'];
         });
+
     }
 @endphp
 
@@ -157,6 +160,55 @@
                         </tbody>
                     </table>
 
+                @endif
+            </div>
+        </div>
+        <div class="d-flex flex-column mx-2 my-2 align-items-center">
+            <div class="d-flex flex-row text-center fw-bold">
+                @if (isset($budgetId))
+                    Планируемые доходы
+                @endif
+            </div>
+            <div>
+                @if (isset($budgetId))
+                    <table class="table table-bordered table-striped table-hover table-sm align-top">
+                        <thead>
+                        <tr>
+                            <th scope="col">Статья</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <form id="category" method="post" enctype="multipart/form-data" action="{{route('planbudget.addIncome')}}">
+                                @csrf
+                                <td class="text-center justify-center">
+                                    <select name="account_id" class="form-select form-select-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg">
+                                        @foreach(\App\Models\Account::where('user_id', Auth::user()->id)->where('category', '!=', 0)->get() as $account)
+                                            <option value="{{$account->id}}">{{$account->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td class="col-1 align-top">
+                                    <button type="submit" class="btn btn-success btn-sm" name="currentBudget" value="{{$currentBudget->id}}">Добавить</button>
+                                </td>
+                            </form>
+                        </tr>
+                        @foreach($currentBudgetIncomes as $item)
+                            <tr>
+                                <form id="category" method="post" enctype="multipart/form-data" action="{{route('planbudget.deleteIncome')}}">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{$item['order']}}">
+                                    <td>
+                                        {{\App\Models\Account::find($item['account'])->name}}
+                                    </td>
+                                    <td class="col-1 align-top text-center">
+                                        <button type="submit" class="btn btn-danger btn-sm" name="currentBudget" value="{{$currentBudget->id}}">Удалить</button>
+                                    </td>
+                                </form>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 @endif
             </div>
         </div>

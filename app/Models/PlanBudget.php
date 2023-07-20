@@ -15,11 +15,12 @@ class PlanBudget extends Model
         'year',
         'user_id',
         'description',
+        'incomes',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    
+
 }
