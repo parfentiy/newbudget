@@ -27,7 +27,7 @@ class ReportsController extends Controller
     public function showTransactions(Request $request) {
         //dump(request());
         if (!$request->filled('is_set')) {
-            if (!$request->is_set) {
+            //if (!$request->is_set) {
                 $source_accs = \App\Models\CashFlow::where('user_id', Auth::user()->id)
                     ->groupBy('source_account_id')
                     ->pluck('source_account_id');
@@ -44,7 +44,7 @@ class ReportsController extends Controller
                 $amount_sum = \App\Models\CashFlow::where('user_id', Auth::user()->id)
                     ->pluck('amount')
                     ->sum();
-            }
+            //}
         } else {
 
             if ($request->is_set) {
@@ -60,8 +60,17 @@ class ReportsController extends Controller
 
 
                 $query = \App\Models\CashFlow::where('user_id', Auth::user()->id);
-                $date_start = $request->date_start;
-                $date_end = $request->date_end;
+
+                if ($request->action === 'filterOnMonth') {
+                    $month=(int)date("m", strtotime(now()));
+                    $year=(int)date("Y", strtotime(now()));
+                    $date_start = date('Y-m-d',strtotime($month . '/1/' . $year));
+                    $date_end = date('Y-m-d',
+                        strtotime($month . '/' . cal_days_in_month(CAL_GREGORIAN, $month, $year). '/'. $year));
+                } else {
+                    $date_start = $request->date_start;
+                    $date_end = $request->date_end;
+                }
                 $amount_min = $request->amount_min;
                 $amount_max = $request->amount_max;
                 if (!is_null($date_start)) $query->whereDate('operation_date', '>=', date($date_start));

@@ -79,7 +79,7 @@
             </tfoot>
 
             </table>
-            
+
         </div>
     </div>
 
@@ -87,7 +87,7 @@
         <div>
             <h4 class="text-center">Фильтры</h4>
             <form method="POST" action="{{ route('post.reports.transactions') }}">
-                @csrf   
+                @csrf
                 <div class="d-flex flex-column  justify-content-center">
                     <input hidden type="number" name="is_set" value="1"/>
                     <div class="d-flex flex-column mx-3 justify-content-top">
@@ -100,6 +100,12 @@
                         <div>
                             <label class="fw-bold pt-2">Конечная дата</label>
                             <input class="form-control form-control-sm" type="date" name="date_end" value="{{$date_end ?? now()}}"/>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column m-3 text-center justify-content-top">
+                        <div>
+                            <label> </label>
+                            <div><button type="submit" class="btn btn-primary btn-sm" name="action" value="filterOnMonth">Текущий месяц</button> </div>
                         </div>
                     </div>
                     <div class="d-flex fw-bold pt-2 flex-column mx-3 justify-content-top">
@@ -141,7 +147,7 @@
                                 @foreach($sort_items as $key => $item)
                                     @if ($key == $sort_item)
                                         <option selected value="{{$key}}">{{$item}}</option>
-                                    @else 
+                                    @else
                                         <option value="{{$key}}">{{$item}}</option>
                                     @endif
                                 @endforeach
@@ -152,7 +158,7 @@
                         <div>
                             <label class="fw-bold pt-2">Порядок сортировки:</label>
                             <select name="sort_type" class="form-select form-select-sm">
-                                
+
                                 @foreach($sort_types as $key => $type)
                                     @if ($key == $sort_type)
                                         <option selected value="{{$key}}">{{$type}}</option>
@@ -172,11 +178,11 @@
                 </div>
             </form>
         </div>
-        
+
         <div>
             <div class="d-flex flex-row my-3 justify-content-center">
-                <form method="POST" action="{{ route('post.reports.transactions') }}">  
-                @csrf  
+                <form method="POST" action="{{ route('post.reports.transactions') }}">
+                @csrf
                 <div class="d-flex flex-row justify-content-center">
 
                         <div>
