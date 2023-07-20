@@ -197,7 +197,7 @@
                             <tr>
                                 <form id="category" method="post" enctype="multipart/form-data" action="{{route('planbudget.deleteIncome')}}">
                                     @csrf
-                                    <input type="hidden" name="id" value="{{$item['order']}}">
+                                    <input type="hidden" name="id" value="{{$item['account']}}">
                                     <td>
                                         {{\App\Models\Account::find($item['account'])->name}}
                                     </td>
