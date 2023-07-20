@@ -28,7 +28,7 @@
             </div>
             <h4>Список бюджетов</h4>
             <div class="d-flex flex-row justify-content-center">
-                <table class="table table-bordered table-striped table-hover table-sm caption-top align-top">
+                <table class="table table-sm table-bordered table-striped table-hover  caption-top align-top">
                     <thead class="table-light text-center align-top">
                     <tr>
                         <th scope="col">#</th>
@@ -104,7 +104,7 @@
             </div>
             <div>
                 @if (isset($budgetId))
-                    <table class="table table-bordered table-striped table-hover table-sm align-top">
+                    <table class="table table-sm table-bordered table-striped table-hover align-top">
                         <thead>
                         <tr>
                             <th scope="col">Порядковый номер</th>
@@ -171,7 +171,7 @@
             </div>
             <div>
                 @if (isset($budgetId))
-                    <table class="table table-bordered table-striped table-hover table-sm align-top">
+                    <table class="table table-sm table-bordered table-striped table-hover align-top">
                         <thead>
                         <tr>
                             <th scope="col">Статья</th>

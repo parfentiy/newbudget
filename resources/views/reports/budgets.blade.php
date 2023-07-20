@@ -80,7 +80,7 @@
             </div>
             <div>
                 @if (isset($budgetId))
-                    <table class="table table-bordered table-striped table-hover table-sm align-top">
+                    <table class="table table-sm table-bordered table-striped table-hover align-top">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -169,7 +169,7 @@
             </div>
             <div>
                 @if (isset($budgetId))
-                    <table class="table table-bordered table-striped table-hover table-sm align-top">
+                    <table class="table table-sm table-bordered table-striped table-hover align-top">
                         <thead>
                         <tr>
                             <th scope="col">Статья</th>
@@ -210,14 +210,14 @@
             </div>
             <div>
                 <h4>Баланс</h4>
-                <table class="table table-bordered table-striped table-hover table-sm align-top">
+                <table class="table table-sm table-bordered table-striped table-hover align-top">
                     <tr>
                         <td>Общий доход</td>
                         <td class="text-right">{{$total}} р.</td>
                     </tr>
                     <tr>
                         <td>Расход</td>
-                        <td class="text-right">{{$totalWasted}} р.</td>
+                        <td class="text-right">{{$totalPlan}} р.</td>
                     </tr>
                     <tr>
                         <td>Остаток по плану</td>
