@@ -57,6 +57,7 @@ class PlanBudgetController extends Controller
 
     public function deleteItem() {
         $budget = PlanBudget::where('id', request()->currentBudget)->first();
+        $array = [];
         foreach (json_decode($budget->dataset, true) as $item) {
             if ($item['order'] != request()->id) {
                 $array[] = $item;
