@@ -122,16 +122,18 @@
                                     <x-input-error :messages="$errors->get('order')" class="mt-2" />
                                 </td>
                                 <td class="text-center justify-center">
-                                    <select id="sel1" onchange="giveSelection(this.value)">
-                                        @foreach(\App\Models\Account::where('user_id', Auth::user()->id)->where('category', 0)->get() as $account)
-                                            <option value="{{$account->id}}">{{$account->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    <select id="sel2" name="account_id">
-                                        @foreach(\App\Models\Account::where('user_id', Auth::user()->id)->where('category', '!=', 0)->get() as $account)
-                                            <option value="{{$account->id}}" data-option="{{$account->category}}">{{$account->name}}</option>
-                                        @endforeach
-                                    </select>
+                                    <div class="d-flex flex-row align-items-center">
+                                        <select id="sel1" class="form-select form-select-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg" onchange="giveSelection(this.value)">
+                                            @foreach(\App\Models\Account::where('user_id', Auth::user()->id)->where('category', 0)->get() as $account)
+                                                <option value="{{$account->id}}">{{$account->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <select id="sel2" name="account_id" class="form-select form-select-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg">
+                                            @foreach(\App\Models\Account::where('user_id', Auth::user()->id)->where('category', '!=', 0)->get() as $account)
+                                                <option value="{{$account->id}}" data-option="{{$account->category}}">{{$account->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </td>
                                 <td>
                                     <x-text-input id="sum" class="block mt-1 items-center justify-center form-control form-control-sm" type="number" name="sum" required autofocus autocomplete="sum" />
@@ -187,17 +189,18 @@
                             <form id="category" method="post" enctype="multipart/form-data" action="{{route('planbudget.addIncome')}}">
                                 @csrf
                                 <td class="text-center justify-center">
-
-                                    <select id="sel3" onchange="giveSelection2(this.value)">
-                                        @foreach(\App\Models\Account::where('user_id', Auth::user()->id)->where('category', 0)->get() as $account)
-                                            <option value="{{$account->id}}">{{$account->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    <select id="sel4" name="account_id">
-                                        @foreach(\App\Models\Account::where('user_id', Auth::user()->id)->where('category', '!=', 0)->get() as $account)
-                                            <option value="{{$account->id}}" data-option="{{$account->category}}">{{$account->name}}</option>
-                                        @endforeach
-                                    </select>
+                                    <div class="d-flex flex-row align-items-center">
+                                        <select id="sel3" class="form-select form-select-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg" onchange="giveSelection2(this.value)">
+                                            @foreach(\App\Models\Account::where('user_id', Auth::user()->id)->where('category', 0)->get() as $account)
+                                                <option value="{{$account->id}}">{{$account->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <select id="sel4" name="account_id" class="form-select form-select-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg">
+                                            @foreach(\App\Models\Account::where('user_id', Auth::user()->id)->where('category', '!=', 0)->get() as $account)
+                                                <option value="{{$account->id}}" data-option="{{$account->category}}">{{$account->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </td>
                                 <td class="col-1 align-top">
                                     <button type="submit" class="btn btn-success btn-sm" name="currentBudget" value="{{$currentBudget->id}}">Добавить</button>
