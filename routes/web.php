@@ -70,8 +70,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/budget-planning/delete-income', [PlanBudgetController::class, 'deleteIncome'])->name('planbudget.deleteIncome');
     Route::get('/budget-planning/delete-income', [PlanBudgetController::class, 'deleteIncome']);
 
-    Route::post('/budget-planning/save-description', [PlanBudgetController::class, 'saveDescription'])
-        ->name('planbudget.addDescription');
+    Route::post('/reports/save-description', [ReportsController::class, 'saveDescription'])
+        ->name('addDescription');
 
     Route::get('/god', function () {
        return view('god-mainpage');

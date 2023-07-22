@@ -135,4 +135,16 @@ class ReportsController extends Controller
 
         return $closestBudget;
     }
+
+
+    public function saveDescription() {
+        $budget = PlanBudget::where('id', request()->currentBudget)->first();
+
+        $budget->description = request()->description;
+        $budget->save();
+
+        return view('reports.budgets', [
+            'budgetId' => request()->currentBudget,
+        ]);
+    }
 }

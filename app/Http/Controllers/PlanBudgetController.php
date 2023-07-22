@@ -72,17 +72,6 @@ class PlanBudgetController extends Controller
         ]);
     }
 
-    public function saveDescription() {
-        $budget = PlanBudget::where('id', request()->currentBudget)->first();
-
-        $budget->description = request()->description;
-        $budget->save();
-
-        return view('planbudget', [
-            'budgetId' => request()->currentBudget,
-        ]);
-    }
-
     public function addIncome() {
         $budget = PlanBudget::where('id', request()->currentBudget)->first();
         foreach (json_decode($budget->incomes, true) as $item) {

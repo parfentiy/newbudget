@@ -230,15 +230,23 @@
         </div>
         <div class="d-flex flex-column mx-2 my-2 align-items-center">
             @if (isset($budgetId))
-                <div>
-                    <h4>Заметки бюджета</h4>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label"></label>
-                    <div class="form-control" id="exampleFormControlTextarea1" rows="10" style="height: 450; width: 350">
-                        {{$currentBudget->description}}
-                    </div>
-                </div>
+                <div class="d-flex flex-column mx-2 my-2 align-items-center" style="height: 450; width: 350">
+                    @if (isset($budgetId))
+                        <form method="post" enctype="multipart/form-data" action="{{route('addDescription')}}">
+                            @csrf
+                            <div>
+                                <h4>Заметки бюджета</h4>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label"></label>
+                                <textarea style="height: 450; width: 350" class="form-control" id="exampleFormControlTextarea1" rows="10" name="description">{{$currentBudget->description}}
+                        </textarea>
+                            </div>
+                            <div class="col-1 align-top align-items-center text-center">
+                                <button type="submit" class="btn btn-primary btn-sm  align-items-center text-center" name="currentBudget" value="{{$currentBudget->id}}">Сохранить</button>
+                            </div>
+                        </form>
+                    @endif
                 </div>
             @endif
         </div>

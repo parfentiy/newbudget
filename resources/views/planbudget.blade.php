@@ -223,24 +223,6 @@
                 @endif
             </div>
         </div>
-        <div class="d-flex flex-column mx-2 my-2 align-items-center">
-            @if (isset($budgetId))
-                <form method="post" enctype="multipart/form-data" action="{{route('planbudget.addDescription')}}">
-                    @csrf
-                    <div>
-                        <h4>Заметки бюджета</h4>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label"></label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="description">{{$currentBudget->description}}
-                        </textarea>
-                    </div>
-                    <div class="col-1 align-top align-items-center text-center">
-                        <button type="submit" class="btn btn-primary btn-sm  align-items-center text-center" name="currentBudget" value="{{$currentBudget->id}}">Сохранить</button>
-                    </div>
-                </form>
-            @endif
-        </div>
     </div>
 </div>
 
