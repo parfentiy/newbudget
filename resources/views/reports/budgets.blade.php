@@ -21,6 +21,7 @@
     if(isset($budgetId)) {
         $currentBudget = \App\Models\PlanBudget::whereId($budgetId)->first();
         $currentBudgetItems = json_decode(\App\Models\PlanBudget::whereId($budgetId)->pluck('dataset')->first(), true);
+        $currentIncomeAccounts = [];
         foreach (json_decode(\App\Models\PlanBudget::whereId($budgetId)->pluck('incomes')->first(), true) as $item) {
             $currentIncomeAccounts[] = $item['account'];
         }
