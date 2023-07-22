@@ -5,6 +5,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CashFlowController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\PlanBudgetController;
+use App\Http\Controllers\GodController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,6 +72,12 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/budget-planning/save-description', [PlanBudgetController::class, 'saveDescription'])
         ->name('planbudget.addDescription');
+
+    Route::get('/god', function () {
+       return view('god-mainpage');
+    });
+    Route::get('/god/users', [GodController::class, 'showUsers']);
+
 
 
 });
