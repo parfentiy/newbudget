@@ -103,6 +103,7 @@ class PlanBudgetController extends Controller
 
     public function deleteIncome() {
         $budget = PlanBudget::where('id', request()->currentBudget)->first();
+        $array = [];
         foreach (json_decode($budget->incomes, true) as $item) {
             if ($item['account'] != (int)request()->id) {
                 $array[] = $item;
