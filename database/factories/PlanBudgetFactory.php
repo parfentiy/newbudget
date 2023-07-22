@@ -24,6 +24,7 @@ class PlanBudgetFactory extends Factory
         for ($i = 1; $i <= 25; $i++) {
             $dataset[] = [
                 'account' => fake()->randomElement($categories),
+                'sum' => fake()->numberBetween(100, 5000),
                 'order' => $i,
             ];
         }

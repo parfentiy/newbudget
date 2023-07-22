@@ -10,9 +10,6 @@
             <a href="{{url('/god/users')}}" class="btn btn-primary shadow-lg">Пользователи</a>
         </div>
         <div class="mb-3 d-grid col-3 mx-auto">
-            <a href="{{route('reports.budgets')}}" class="btn btn-primary shadow-lg" class="btn btn-primary shadow-lg">Бюджеты</a>
-        </div>
-        <div class="mb-3 d-grid col-3 mx-auto">
             <a href="#" class="btn btn-primary shadow-lg"></a>
         </div>
     </div>

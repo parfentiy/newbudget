@@ -122,9 +122,14 @@
                                     <x-input-error :messages="$errors->get('order')" class="mt-2" />
                                 </td>
                                 <td class="text-center justify-center">
-                                    <select name="account_id" class="form-select form-select-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg">
-                                        @foreach(\App\Models\Account::where('user_id', Auth::user()->id)->where('category', '!=', 0)->get() as $account)
+                                    <select id="sel1" onchange="giveSelection(this.value)">
+                                        @foreach(\App\Models\Account::where('user_id', Auth::user()->id)->where('category', 0)->get() as $account)
                                             <option value="{{$account->id}}">{{$account->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <select id="sel2" name="account_id">
+                                        @foreach(\App\Models\Account::where('user_id', Auth::user()->id)->where('category', '!=', 0)->get() as $account)
+                                            <option value="{{$account->id}}" data-option="{{$account->category}}">{{$account->name}}</option>
                                         @endforeach
                                     </select>
                                 </td>
@@ -182,9 +187,15 @@
                             <form id="category" method="post" enctype="multipart/form-data" action="{{route('planbudget.addIncome')}}">
                                 @csrf
                                 <td class="text-center justify-center">
-                                    <select name="account_id" class="form-select form-select-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg">
-                                        @foreach(\App\Models\Account::where('user_id', Auth::user()->id)->where('category', '!=', 0)->get() as $account)
+
+                                    <select id="sel3" onchange="giveSelection2(this.value)">
+                                        @foreach(\App\Models\Account::where('user_id', Auth::user()->id)->where('category', 0)->get() as $account)
                                             <option value="{{$account->id}}">{{$account->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <select id="sel4" name="account_id">
+                                        @foreach(\App\Models\Account::where('user_id', Auth::user()->id)->where('category', '!=', 0)->get() as $account)
+                                            <option value="{{$account->id}}" data-option="{{$account->category}}">{{$account->name}}</option>
                                         @endforeach
                                     </select>
                                 </td>
@@ -232,3 +243,32 @@
         </div>
     </div>
 </div>
+
+<script>
+    var sel1 = document.querySelector('#sel1');
+    var sel2 = document.querySelector('#sel2');
+    var sel3 = document.querySelector('#sel3');
+    var sel4 = document.querySelector('#sel4');
+    var options2 = sel2.querySelectorAll('option');
+    var options4 = sel4.querySelectorAll('option');
+    function giveSelection(selValue) {
+        sel2.innerHTML = '';
+        for(var i = 0; i < options2.length; i++) {
+            if(options2[i].dataset.option === selValue) {
+                sel2.appendChild(options2[i]);
+            }
+        }
+    }
+    function giveSelection2(selValue) {
+        sel4.innerHTML = '';
+        for(var i = 0; i < options4.length; i++) {
+            if(options4[i].dataset.option === selValue) {
+                sel4.appendChild(options4[i]);
+            }
+        }
+    }
+    giveSelection(sel1.value);
+    giveSelection2(sel3.value);
+</script>
+
+
