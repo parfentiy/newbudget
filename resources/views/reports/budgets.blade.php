@@ -44,10 +44,10 @@
     </div>
     <div class="d-flex flex-row justify-content-center">
         <div class="d-flex flex-column mx-2 my-2 align-items-center">
-            <div>
-
+            <div class="d-flex flex-row justify-content-center fw-bold">
+                Список бюджетов
             </div>
-            <h4>Список бюджетов</h4>
+
             <div class="d-flex flex-row justify-content-center">
                 <table class="table table-bordered table-striped table-hover table-sm caption-top align-top">
                     <thead class="table-light text-center align-top">
@@ -243,7 +243,7 @@
                         </textarea>
                             </div>
                             <div class="col-1 align-top align-items-center text-center">
-                                <button type="submit" class="btn btn-primary btn-sm  align-items-center text-center" name="currentBudget" value="{{$currentBudget->id}}">Сохранить</button>
+                                <button type="submit" class="btn btn-primary btn-sm shadow-lg align-items-center text-center" name="currentBudget" value="{{$currentBudget->id}}">Сохранить заметку</button>
                             </div>
                         </form>
                     @endif

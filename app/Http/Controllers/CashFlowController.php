@@ -14,7 +14,6 @@ class CashFlowController extends Controller
 
         $categories = Account::where('user_id', Auth::user()->id)->where('category', 0)->get();
         $subCategories = Account::where('user_id', Auth::user()->id)->where('category', '!=', 0)->get();
-        //dd($subCategories);
 
         return view('transactions.new-transaction', [
             'categories' => $categories,
@@ -23,8 +22,6 @@ class CashFlowController extends Controller
     }
 
     public function create() {
-
-        //dd(request());
         CashFlow::create([
             'amount' => request()->amount,
             'operation_date' => request()->operation_date,
@@ -38,7 +35,6 @@ class CashFlowController extends Controller
     }
 
     public function delete() {
-        //dd(request());
         CashFlow::find(request()->id)->delete();
 
         return redirect()->back();

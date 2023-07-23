@@ -23,10 +23,10 @@
     </div>
     <div class="d-flex flex-row justify-content-center">
         <div class="d-flex flex-column mx-2 my-2 align-items-center">
-            <div>
-
+            <div class="d-flex flex-row text-center fw-bold">
+                Список бюджетов
             </div>
-            <h4>Список бюджетов</h4>
+
             <div class="d-flex flex-row justify-content-center">
                 <table class="table table-sm table-bordered table-striped table-hover  caption-top align-top">
                     <thead class="table-light text-center align-top">
