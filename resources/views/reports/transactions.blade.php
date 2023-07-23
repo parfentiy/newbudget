@@ -61,7 +61,7 @@
                             {{$transaction->description}}
                         </td>
                         <td class="col-1 align-top">
-                            <button type="submit" class="btn btn-danger btn-sm" name="id" value="{{$transaction->id}}">Удалить</button>
+                            <button type="submit" class="btn btn-danger btn-sm" name="id" value="{{$transaction->id}}"  onclick="return confirm('Уверены, что хотите удалить?');">Удалить</button>
                         </td>
                     </form>
                 </tr>
