@@ -28,7 +28,7 @@
             </div>
 
             <div class="d-flex flex-row justify-content-center">
-                <table class="table table-sm table-bordered table-striped table-hover  caption-top align-top">
+                <table class="table table-sm w-auto table-bordered table-striped table-hover caption-top align-top">
                     <thead class="table-light text-center align-top">
                     <tr>
                         <th scope="col">#</th>
@@ -55,10 +55,10 @@
                                 <x-text-input id="year" class="form-control form-control-sm block mt-1 items-center justify-center" type="text" name="year" required autofocus autocomplete="year" />
                                 <x-input-error :messages="$errors->get('year')" class="mt-2" />
                             </td>
-                            <td class="col-1 align-top">
+                            <td class="align-top">
                                 <button type="submit" class="btn btn-success btn-sm" name="id" value="">Создать</button>
                             </td>
-                            <td class="col-1 align-top">
+                            <td class="align-top">
                                 <select name="cloneFrom" class="form-select form-select-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg">
                                     @foreach (\App\Models\PlanBudget::where('user_id', Auth::user()->id)->orderBy('year')->orderBy('month')->get() as $key => $planBudget)
                                         <option value="{{$planBudget->id}}">{{$months[$planBudget->month - 1]}} {{$planBudget->year}}</option>
@@ -84,10 +84,10 @@
                                 <td>
                                     {{$planBudget->year}}
                                 </td>
-                                <td class="col-1 align-top">
+                                <td class="align-top">
                                     <button type="submit" class="btn btn-danger btn-sm" name="delete" value="{{$planBudget->id}}" onclick="return confirm('Уверены, что хотите удалить?');">Удалить</button>
                                 </td>
-                                <td class="col-1 align-top">
+                                <td class="align-top">
                                     <button type="submit" class="btn btn-primary btn-sm" name="budgetId" value="{{$planBudget->id}}">Планировать</button>
                                 </td>
                             </form>
@@ -110,7 +110,7 @@
             </div>
             <div>
                 @if (isset($budgetId))
-                    <table class="table table-sm table-bordered table-striped table-hover align-top">
+                    <table class="table table-sm w-auto table-bordered table-striped table-hover align-top">
                         <thead>
                         <tr>
                             <th scope="col">Порядковый номер</th>
@@ -124,7 +124,7 @@
                             <form id="category" method="post" enctype="multipart/form-data" action="{{route('planbudget.addItem')}}">
                                 @csrf
                                 <td class="text-center">
-                                    <x-text-input id="order" class="block mt-1 w-50 items-center justify-center form-control form-control-sm" type="text" name="order" required autofocus autocomplete="order" />
+                                    <x-text-input id="order" class="block mt-1 items-center justify-center form-control form-control-sm" type="text" name="order" required autofocus autocomplete="order" />
                                     <x-input-error :messages="$errors->get('order')" class="mt-2" />
                                 </td>
                                 <td class="text-center justify-center">
