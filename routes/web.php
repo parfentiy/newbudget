@@ -65,6 +65,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/budget-planning/delete-item', [PlanBudgetController::class, 'deleteItem'])->name('planbudget.deleteItem');
     Route::get('/budget-planning/delete-item', [PlanBudgetController::class, 'deleteItem']);
 
+    Route::post('/budget-planning/clone-budget', [PlanBudgetController::class, 'clone'])->name('planbudget.clone');
+
     Route::post('/budget-planning/add-income', [PlanBudgetController::class, 'addIncome'])->name('planbudget.addIncome');
     Route::get('/budget-planning/add-income', [PlanBudgetController::class, 'addIncome']);
     Route::post('/budget-planning/delete-income', [PlanBudgetController::class, 'deleteIncome'])->name('planbudget.deleteIncome');

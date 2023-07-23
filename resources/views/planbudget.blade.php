@@ -41,7 +41,7 @@
                     <tbody class="text-center">
                     <tr>
                         <form class="" name="" id="category" method="post" enctype="multipart/form-data" action="{{route('planbudget.add')}}">
-                            @csrf
+                        @csrf
                             <td>
                             </td>
                             <td>
@@ -58,10 +58,16 @@
                             <td class="col-1 align-top">
                                 <button type="submit" class="btn btn-success btn-sm" name="id" value="">Создать</button>
                             </td>
-                            <td>
-
+                            <td class="col-1 align-top">
+                                <select name="cloneFrom" class="form-select form-select-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg">
+                                    @foreach (\App\Models\PlanBudget::where('user_id', Auth::user()->id)->orderBy('year')->orderBy('month')->get() as $key => $planBudget)
+                                        <option value="{{$planBudget->id}}">{{$months[$planBudget->month - 1]}} {{$planBudget->year}}</option>
+                                    @endforeach
+                                </select>
+                                <button type="submit" class="btn btn-primary btn-sm" name="isClone" value="true">Клонировать</button>
                             </td>
                         </form>
+
                     </tr>
                     @foreach (\App\Models\PlanBudget::where('user_id', Auth::user()->id)->orderBy('year')->orderBy('month')->get() as $key => $planBudget)
 

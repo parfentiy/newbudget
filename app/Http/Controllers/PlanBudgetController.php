@@ -23,16 +23,29 @@ class PlanBudgetController extends Controller
     }
 
     public function add() {
+        if (request()->isClone) {
+            $dataset = PlanBudget::whereId(request()->cloneFrom)->first()->dataset;
+            $incomes = PlanBudget::whereId(request()->cloneFrom)->first()->incomes;
+        } else {
+            $dataset = json_encode([]);
+            $incomes = json_encode([]);
+        }
         $newBudget = PlanBudget::create([
             'month' => request()->month,
             'year' => request()->year,
             'user_id' => Auth::user()->id,
-            'dataset' => json_encode([]),
-            'incomes' => json_encode([]),
+            'dataset' => $dataset,
+            'incomes' => $incomes,
         ]);
 
         return view('planbudget', [
             'budgetId' => $newBudget->id,
+        ]);
+    }
+
+    public function clone() {
+
+        return view('planbudget', [
         ]);
     }
 
