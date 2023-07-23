@@ -11,6 +11,60 @@ class GodController extends Controller
 {
     public function showUsers() {
 
-        return view('admin.users');
+        return view('admin.users', [
+            'users' => User::all(),
+        ]);
     }
+
+    public function changeBanStatus() {
+        $this->isBanned(request()->userId) ? $this->unban(request()->userId) : $this->ban(request()->userId);
+
+        return view('admin.users', [
+            'users' => User::all(),
+        ]);
+    }
+
+    public function deleteUser() {
+        User::find(request()->userId)->delete();
+
+        return view('admin.users', [
+            'users' => User::all(),
+        ]);
+    }
+
+    private function ban($userId)
+    {
+        $ban_permanently = 0;
+        $user = User::find($userId)->first();
+        $user->banned_till = $ban_permanently;
+        $user->save();
+    }
+
+    private function unban($userId)
+    {
+        $user = User::find($userId)->first();
+        $user->banned_till = null;
+        $user->save();
+    }
+
+    private function isBanned($userId)
+    {
+        $user = User::find($userId)->first();
+        if ($user->banned_till != null) {
+            if ($user->banned_till == 0) {
+                $message = "Banned Permanently";
+            }
+            if (now()->lessThan($user->banned_till)) {
+                $banned_days = now()->diffInDays($user->banned_till) + 1;
+                //$message = "Suspended for " . $banned_days . ' ' . Str::plural('day', $banned_days);
+            }
+
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+
+
 }

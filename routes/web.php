@@ -77,7 +77,8 @@ Route::middleware('auth')->group(function () {
        return view('god-mainpage');
     });
     Route::get('/god/users', [GodController::class, 'showUsers']);
-
+    Route::post('/god/users/change-ban', [GodController::class, 'changeBanStatus'])->name('changeUserBan');
+    Route::post('/god/users/user-delete', [GodController::class, 'deleteUser'])->name('user.delete');
 
 
 });
