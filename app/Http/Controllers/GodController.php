@@ -35,21 +35,21 @@ class GodController extends Controller
     private function ban($userId)
     {
         $ban_permanently = 0;
-        $user = User::find($userId)->first();
+        $user = User::whereId((int)$userId)->first();
         $user->banned_till = $ban_permanently;
         $user->save();
     }
 
     private function unban($userId)
     {
-        $user = User::find($userId)->first();
+        $user = User::whereId((int)$userId)->first();
         $user->banned_till = null;
         $user->save();
     }
 
     private function isBanned($userId)
     {
-        $user = User::find($userId)->first();
+        $user = User::whereId($userId)->first();
         if ($user->banned_till != null) {
             if ($user->banned_till == 0) {
                 $message = "Banned Permanently";
