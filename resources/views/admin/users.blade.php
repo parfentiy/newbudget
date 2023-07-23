@@ -43,7 +43,7 @@
                     <td>
                         <form method="post" enctype="multipart/form-data" action="{{route('user.delete')}}">
                         @csrf
-                            <button type="submit" class="btn btn-danger btn-sm" name="userId" value="{{$user->id}}">
+                            <button type="submit" class="btn btn-danger btn-sm" name="userId" value="{{$user->id}}" onclick="return confirm('Уверены, что хотите удалить?');">
                                 Удалить
                             </button>
                         </form>
