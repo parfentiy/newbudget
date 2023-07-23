@@ -50,7 +50,7 @@
                     @if (\App\Models\Account::where('category', $category->id)->where('user_id', Auth::user()->id)->count() > 0)
                         <button disabled type="submit" class="btn btn-danger btn-sm" name="id" value="{{$category->id}}">Удалить</button>
                     @else
-                        <button type="submit" class="btn btn-danger btn-sm" name="id" value="{{$category->id}}">Удалить</button>
+                        <button type="submit" class="btn btn-danger btn-sm" name="id" value="{{$category->id}}" onclick="return confirm('Уверены, что хотите удалить?');">Удалить</button>
                     @endif
                 </td>
             </form>
@@ -106,7 +106,7 @@
                         @foreach ($categories as $key => $category)
                             @if ($subCategory->category == $category->id)
                                 <option selected value="{{$category->id}}">{{$category->name}}</option>
-                            @else 
+                            @else
                                 <option value="{{$category->id}}">{{$category->name}}</option>
                             @endif
                         @endforeach
@@ -125,7 +125,7 @@
             <form name="" id="delete" method="post" enctype="multipart/form-data" action="{{route('account.delete')}}">
             @csrf
                 <td class="col-1">
-                    <button type="submit" class="btn btn-danger btn-sm" name="id" value="{{$subCategory->id}}">Удалить</button>
+                    <button type="submit" class="btn btn-danger btn-sm" name="id" value="{{$subCategory->id}}" onclick="return confirm('Уверены, что хотите удалить?');">Удалить</button>
                 </td>
             </form>
         </tr>

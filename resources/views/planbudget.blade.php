@@ -79,7 +79,7 @@
                                     {{$planBudget->year}}
                                 </td>
                                 <td class="col-1 align-top">
-                                    <button type="submit" class="btn btn-danger btn-sm" name="delete" value="{{$planBudget->id}}">Удалить</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" name="delete" value="{{$planBudget->id}}" onclick="return confirm('Уверены, что хотите удалить?');">Удалить</button>
                                 </td>
                                 <td class="col-1 align-top">
                                     <button type="submit" class="btn btn-primary btn-sm" name="budgetId" value="{{$planBudget->id}}">Планировать</button>
@@ -159,7 +159,7 @@
                                         {{$item['sum']}} р.
                                     </td>
                                     <td class="col-1 align-top text-center">
-                                        <button type="submit" class="btn btn-danger btn-sm" name="currentBudget" value="{{$currentBudget->id}}">Удалить</button>
+                                        <button type="submit" class="btn btn-danger btn-sm" name="currentBudget" value="{{$currentBudget->id}}" onclick="return confirm('Уверены, что хотите удалить?');">Удалить</button>
                                     </td>
                                 </form>
                             </tr>
@@ -216,7 +216,7 @@
                                         {{\App\Models\Account::find($item['account'])->name}}
                                     </td>
                                     <td class="col-1 align-top text-center">
-                                        <button type="submit" class="btn btn-danger btn-sm" name="currentBudget" value="{{$currentBudget->id}}">Удалить</button>
+                                        <button type="submit" class="btn btn-danger btn-sm" name="currentBudget" value="{{$currentBudget->id}}" onclick="return confirm('Уверены, что хотите удалить?');">Удалить</button>
                                     </td>
                                 </form>
                             </tr>
