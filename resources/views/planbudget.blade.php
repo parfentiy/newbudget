@@ -100,14 +100,11 @@
         </div>
 
         <div class="d-flex flex-column mx-2 my-2 align-items-center">
-
-            <div class="d-flex flex-row text-center fw-bold">
-                @if (!isset($budgetId))
-                    Текущий бюджет не выбран
-                @else
-                    Текущий бюджет -> {{$months[$currentBudget['month'] - 1]}} - {{$currentBudget['year']}}
-                @endif
-            </div>
+            @if (!isset($budgetId))
+                <div class="d-flex flex-row text-xxl fw-bold" style="width: auto;">Текущий бюджет не выбран</div>
+            @else
+                <div class="d-flex flex-row text-xxl fs-6 badge bg-primary text-wrap fw-bold" style="width: auto;">Текущий бюджет: {{$months[$currentBudget['month'] - 1]}} - {{$currentBudget['year']}}</div>
+            @endif
             <div>
                 @if (isset($budgetId))
                     <table class="table table-sm w-auto table-bordered table-striped table-hover align-top">

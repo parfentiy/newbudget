@@ -1,5 +1,5 @@
 <head>
-    <title>Бюджет. Главная страница</title>
+    <title>Бюджет. Версия 2.0.1</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="/bootstrap.min.css" rel="stylesheet">
     <script src="/bootstrap.bundle.min.js"></script>

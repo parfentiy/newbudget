@@ -1,5 +1,4 @@
 <head>
-    <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/bootstrap.min.css" rel="stylesheet">
     <script src="/bootstrap.bundle.min.js"></script>
@@ -58,7 +57,7 @@
             <x-text-input id="operation_date" class="block mt-1 w-25 items-center justify-center" type="date" name="operation_date" :value="old('operation_date')" required autofocus autocomplete="operation_date" />
             <x-input-error :messages="$errors->get('operation_date')" class="mt-2" />
         </div>
-    
+
         <div class="d-flex flex-row justify-content-center">
             <x-input-label for="description" :value="__('Описание')" />
         </div>
@@ -67,7 +66,7 @@
             <x-input-error :messages="$errors->get('description')" class="mt-2" />
         </div>
 
-        
+
 
 
 

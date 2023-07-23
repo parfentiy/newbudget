@@ -3,7 +3,6 @@
 @endphp
 
 <head>
-    <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/bootstrap.min.css" rel="stylesheet">
     <script src="/bootstrap.bundle.min.js"></script>
