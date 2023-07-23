@@ -221,7 +221,7 @@
                     </tr>
                     <tr>
                         <td>Остаток по плану</td>
-                        <td class="text-right">{{$total - $totalWasted}} р.</td>
+                        <td class="text-right">{{$total - $totalPlan}} р.</td>
                     </tr>
                 </table>
             </div>
