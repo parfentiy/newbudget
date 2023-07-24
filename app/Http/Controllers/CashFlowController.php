@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\TelegrammBot;
 use Illuminate\Http\Request;
 use \App\Models\Account;
 use \App\Models\CashFlow;
@@ -22,6 +23,14 @@ class CashFlowController extends Controller
     }
 
     public function create() {
+        $message = "Произведена транзакция: \n" .
+            "на дату " . date("d.m.Y", strtotime(request()->operation_date)) . "\n" .
+            Account::find(request()->source_account_id)->name .
+            " -> " . Account::find(request()->dest_account_id)->name . "\n" .
+            "на " . request()->amount . " рублей.\n" .
+            "Комментарий к расходу: " . request()->description . "\n";
+        TelegrammBot::sendMessage($message);
+
         CashFlow::create([
             'amount' => request()->amount,
             'operation_date' => request()->operation_date,
@@ -35,6 +44,15 @@ class CashFlowController extends Controller
     }
 
     public function delete() {
+        $transaction = CashFlow::whereId(request()->id)->first();
+        $message = "УДАЛЕНА транзакция: \n" .
+            "на дату " . date("d.m.Y", strtotime($transaction->operation_date)) . "\n" .
+            Account::find($transaction->source_account_id)->name .
+            " -> " . Account::find($transaction->dest_account_id)->name . "\n" .
+            "на " . $transaction->amount . " рублей.\n" .
+            "Комментарий к расходу: " . $transaction->description . "\n";
+        TelegrammBot::sendMessage($message);
+
         CashFlow::find(request()->id)->delete();
 
         return redirect()->back();

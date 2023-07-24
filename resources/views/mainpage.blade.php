@@ -49,13 +49,26 @@
         <div class="d-flex flex-column mx-2 my-2 align-items-center">
             <div>
                 <a href="/reports">
-                    <img src="images/reports.png"
+                    <img src="images/reports.jpg"
                         style="text-indent:-9999px;line-height:0;border:0;height:100px;width:100px;cursor:pointer;float:left;">
                 </a>
             </div>
             <div class="text-center">
                 <a href="/reports">
                     Отчеты
+                </a>
+            </div>
+        </div>
+        <div class="d-flex flex-column mx-2 my-2 align-items-center">
+            <div>
+                <a href="/settings">
+                    <img src="images/settings.jpg"
+                         style="text-indent:-9999px;line-height:0;border:0;height:100px;width:100px;cursor:pointer;float:left;">
+                </a>
+            </div>
+            <div class="text-center">
+                <a href="/settings">
+                    Настройки
                 </a>
             </div>
         </div>

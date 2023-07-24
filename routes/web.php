@@ -6,7 +6,10 @@ use App\Http\Controllers\CashFlowController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\PlanBudgetController;
 use App\Http\Controllers\GodController;
+use App\Http\Controllers\SettingController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Models\Setting;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +85,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/god/users/change-ban', [GodController::class, 'changeBanStatus'])->name('changeUserBan');
     Route::post('/god/users/user-delete', [GodController::class, 'deleteUser'])->name('user.delete');
 
+    Route::get('/settings', function () {
+        $settings = Setting::where('user_id', Auth::user()->id)->first();
+        return view('settings', ['settings' => $settings]);
+    })->name('settings');
+    Route::post('/settings/save' , [SettingController::class, 'save'])->name('settings.save');
 
 });
 
