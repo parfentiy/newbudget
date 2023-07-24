@@ -10,6 +10,7 @@ class TelegramController extends Controller
 {
     public function getMe() {
         $response = Telegram::bot('mybot')->getMe();
+        Log::info($response);
         return;
     }
 
@@ -20,6 +21,7 @@ class TelegramController extends Controller
         ]);
 
         $messageId = $response->getMessageId();
+        Log::info($messageId);
     }
 
     /*public function getFromBot() {
