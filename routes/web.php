@@ -38,7 +38,7 @@ Route::post('/5649872138:AAEH1o1FSuJfjqwvbavQLOd8Bzpr3UICL3w/webhook', function 
         'url' => 'https://bgt.parfentiy.site/5649872138:AAEH1o1FSuJfjqwvbavQLOd8Bzpr3UICL3w/webhook',
     ]);*/
     $updates = Telegram::getWebhookUpdate();
-    Log::info($response);
+    //Log::info($response);
     Log::info($updates);
     return 'ok';
 });
