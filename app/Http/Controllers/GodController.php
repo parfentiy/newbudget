@@ -32,7 +32,7 @@ class GodController extends Controller
         ]);
     }
 
-    private function ban($userId)
+    private function ban($userId) // Заблокировать пользователя
     {
         $ban_permanently = 0;
         $user = User::whereId((int)$userId)->first();
