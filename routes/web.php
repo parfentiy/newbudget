@@ -9,6 +9,7 @@ use App\Http\Controllers\GodController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TelegramController;
 use App\Models\Setting;
 
 /*
@@ -90,6 +91,11 @@ Route::middleware('auth')->group(function () {
         return view('settings', ['settings' => $settings]);
     })->name('settings');
     Route::post('/settings/save' , [SettingController::class, 'save'])->name('settings.save');
+
+    Route::get('/tbot', [TelegramController::class, 'getMe']);
+    Route::get('/tbot/send', [TelegramController::class, 'send']);
+    Route::get('/tbot/get', [TelegramController::class, 'getFromBot']);
+    Route::get('/tbot/setwebhook', [TelegramController::class, 'setWebHook']);
 
 });
 
