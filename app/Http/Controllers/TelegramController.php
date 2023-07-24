@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Telegram\Bot\Laravel\Facades\Telegram;
-use \App\Http\Controllers\Log;
+use Illuminate\Support\Facades\Log;
 
 use Illuminate\Http\Request;
 
