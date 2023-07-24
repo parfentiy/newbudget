@@ -148,6 +148,15 @@
                             </form>
                         </tr>
                         @foreach($currentBudgetItems as $item)
+                            @php
+                                $wasted = \App\Models\CashFlow::where('user_id', Auth::user()->id)
+                                    ->where('dest_account_id', $item['account'])
+                                    ->whereMonth('operation_date', $currentBudget['month'])
+                                    ->whereYear('operation_date', $currentBudget['year'])
+                                    ->pluck('amount')
+                                    ->sum();
+                            @endphp
+
                             <tr>
                                 <form id="category" method="post" enctype="multipart/form-data" action="{{route('planbudget.deleteItem')}}">
                                     @csrf
@@ -158,8 +167,9 @@
                                     <td>
                                         {{\App\Models\Account::find($item['account'])->name}}
                                     </td>
-                                    <td  class="text-center">
-                                        {{$item['sum']}} р.
+                                    <td class="text-center">
+                                        <div title="Потраченная сумма {{$wasted}} р.">{{$item['sum']}} р.</div>
+
                                     </td>
                                     <td class="col-1 align-top text-center">
                                         <button type="submit" class="btn btn-danger btn-sm" name="currentBudget" value="{{$currentBudget->id}}" onclick="return confirm('Уверены, что хотите удалить?');">Удалить</button>
@@ -169,7 +179,6 @@
                         @endforeach
                         </tbody>
                     </table>
-
                 @endif
             </div>
         </div>
