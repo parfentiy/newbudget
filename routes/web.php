@@ -97,7 +97,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/tbot', [TelegramController::class, 'getMe']);
     Route::get('/tbot/send', [TelegramController::class, 'send']);
     Route::get('/tbot/get', [TelegramController::class, 'getFromBot']);
-    Route::post('/tbot/setwebhook', [TelegramController::class, 'setWebHook']);
+    Route::get('/tbot/setwebhook', [TelegramController::class, 'setWebHook']);
     Route::post('/5649872138:AAEH1o1FSuJfjqwvbavQLOd8Bzpr3UICL3w/webhook', function () {
         $response = Telegram::setWebhook(['url' => 'https://bgt.parfentiy.site/5649872138:AAEH1o1FSuJfjqwvbavQLOd8Bzpr3UICL3w/webhook']);
         $updates = Telegram::getWebhookUpdate();
