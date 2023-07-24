@@ -29,6 +29,19 @@ Route::get('/', function () {
     return view('mainpage');
 })->middleware(['auth', 'verified'])->name('mainpage');
 
+Route::get('/tbot', [TelegramController::class, 'getMe']);
+Route::get('/tbot/send', [TelegramController::class, 'send']);
+Route::get('/tbot/get', [TelegramController::class, 'getFromBot']);
+Route::post('/tbot/setwebhook', [TelegramController::class, 'setWebHook']);
+Route::post('/5649872138:AAEH1o1FSuJfjqwvbavQLOd8Bzpr3UICL3w/webhook', function () {
+    /*$response = Telegram::setWebhook([
+        'url' => 'https://bgt.parfentiy.site/5649872138:AAEH1o1FSuJfjqwvbavQLOd8Bzpr3UICL3w/webhook',
+    ]);*/
+    $updates = Telegram::getWebhookUpdate();
+    Log::info($response);
+    Log::info($updates);
+    return 'ok';
+});
 
 
 Route::middleware('auth')->group(function () {
@@ -94,19 +107,7 @@ Route::middleware('auth')->group(function () {
     })->name('settings');
     Route::post('/settings/save' , [SettingController::class, 'save'])->name('settings.save');
 
-    Route::get('/tbot', [TelegramController::class, 'getMe']);
-    Route::get('/tbot/send', [TelegramController::class, 'send']);
-    Route::get('/tbot/get', [TelegramController::class, 'getFromBot']);
-    Route::post('/tbot/setwebhook', [TelegramController::class, 'setWebHook']);
-    Route::post('/5649872138:AAEH1o1FSuJfjqwvbavQLOd8Bzpr3UICL3w/webhook', function () {
-        $response = Telegram::setWebhook([
-            'url' => 'https://bgt.parfentiy.site/5649872138:AAEH1o1FSuJfjqwvbavQLOd8Bzpr3UICL3w/webhook',
-        ]);
-        $updates = Telegram::getWebhookUpdate();
-        Log::info($response);
-        Log::info($updates);
-        return 'ok';
-    });
+
 
 });
 
