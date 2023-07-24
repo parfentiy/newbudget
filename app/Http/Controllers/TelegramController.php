@@ -24,10 +24,11 @@ class TelegramController extends Controller
         Log::info($messageId);
     }
 
-    /*public function getFromBot() {
+    public function getFromBot() {
         $response = Telegram::getUpdates();
+        Log::info($response);
         return;
-    }*/
+    }
 
     public function setWebHook() {
         $response = Telegram::setWebhook(['url' => 'https://bgt.parfentiy.site/5649872138:AAEH1o1FSuJfjqwvbavQLOd8Bzpr3UICL3w/webhook']);
