@@ -52,7 +52,7 @@
                                 </select>
                             </td>
                             <td>
-                                <x-text-input id="year" class="form-control form-control-sm block mt-1 items-center justify-center" type="text" name="year" required autofocus autocomplete="year" />
+                                <x-text-input id="year" min="1980" max="2500" pattern="\d{4}" maxlength="4" class="form-control form-control-sm block mt-1 items-center justify-center" type="number" name="year" required autofocus autocomplete="year" />
                                 <x-input-error :messages="$errors->get('year')" class="mt-2" />
                             </td>
                             <td class="align-top">
