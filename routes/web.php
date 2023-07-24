@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\TelegramController;
+use Telegram\Bot\Laravel\Facades\Telegram;
 use App\Models\Setting;
 
 /*
@@ -98,7 +99,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/tbot/get', [TelegramController::class, 'getFromBot']);
     Route::post('/tbot/setwebhook', [TelegramController::class, 'setWebHook']);
     Route::post('/5649872138:AAEH1o1FSuJfjqwvbavQLOd8Bzpr3UICL3w/webhook', function () {
+        $response = Telegram::setWebhook(['url' => 'https://bgt.parfentiy.site/5649872138:AAEH1o1FSuJfjqwvbavQLOd8Bzpr3UICL3w/webhook']);
         $updates = Telegram::getWebhookUpdate();
+        Log::info($response);
         Log::info($updates);
         return 'ok';
     });
