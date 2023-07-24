@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Telegram\Bot\Laravel\Facades\Telegram;
+use \App\Http\Controllers\Log;
 
 use Illuminate\Http\Request;
 
@@ -28,6 +29,7 @@ class TelegramController extends Controller
 
     public function setWebHook() {
         $response = Telegram::setWebhook(['url' => 'https://bgt.parfentiy.site/5649872138:AAEH1o1FSuJfjqwvbavQLOd8Bzpr3UICL3w/webhook']);
+        Log::info($response);
         return;
     }
 
