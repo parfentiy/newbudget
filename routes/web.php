@@ -9,6 +9,7 @@ use App\Http\Controllers\GodController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\TelegramController;
 use App\Models\Setting;
 
@@ -96,6 +97,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/tbot/send', [TelegramController::class, 'send']);
     Route::get('/tbot/get', [TelegramController::class, 'getFromBot']);
     Route::post('/tbot/setwebhook', [TelegramController::class, 'setWebHook']);
+    Route::post('/5649872138:AAEH1o1FSuJfjqwvbavQLOd8Bzpr3UICL3w/webhook', function () {
+        $updates = Telegram::getWebhookUpdate();
+        Log::info($updates);
+        return 'ok';
+    });
 
 });
 
