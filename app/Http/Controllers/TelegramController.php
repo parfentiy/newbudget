@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Setting;
+use Illuminate\Support\Facades\Auth;
 use Telegram\Bot\Laravel\Facades\Telegram;
 use Illuminate\Support\Facades\Log;
 
@@ -14,14 +16,19 @@ class TelegramController extends Controller
         return;
     }
 
-    public function send() {
-        $response = Telegram::sendMessage([
-            'chat_id' => '247164112',
-            'text' => 'Hello World'
-        ]);
+    public function send($message) {
+        $userSetting = Setting::where('user_id', Auth::user()->id)->first();
+        if ($userSetting->is_tbot_active) {
+            $idChannel = $userSetting->tbot_channel_id;
 
-        $messageId = $response->getMessageId();
-        Log::info($messageId);
+            $response = Telegram::sendMessage([
+                'chat_id' => $idChannel,
+                'text' => $message,
+            ]);
+
+            $messageId = $response->getMessageId();
+            Log::info($messageId);
+        }
     }
 
     public function getFromBot() {
