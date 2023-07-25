@@ -25,13 +25,23 @@ class TelegramController extends Controller
     }
 
     public function getFromBot() {
-        $response = Telegram::getUpdates();
-        Log::info($response);
-        return;
+        $updates = Telegram::getWebhookUpdate();
+        Log::info($updates);
+        if (isset($updates['message'])) {
+            $response = Telegram::sendMessage([
+                'chat_id' => $updates['message']['from']['id'],
+                'text' => 'Вы писали: ' . $updates['message']['text'],
+        ]);
+        } else {
+            Log::info('Wrong message');
+        }
+
+
+        return 'ok';
     }
 
     public function setWebHook() {
-        $response = Telegram::setWebhook(['url' => 'https://bgt.parfentiy.site/5649872138:AAEH1o1FSuJfjqwvbavQLOd8Bzpr3UICL3w/webhook']);
+        $response = Telegram::setWebhook(['url' => env('TELEGRAM_WEBHOOK_URL')]);
         Log::info($response);
         return;
     }

@@ -31,18 +31,8 @@ Route::get('/', function () {
 
 Route::get('/tbot', [TelegramController::class, 'getMe']);
 Route::get('/tbot/send', [TelegramController::class, 'send']);
-Route::get('/tbot/get', [TelegramController::class, 'getFromBot']);
 Route::post('/tbot/setwebhook', [TelegramController::class, 'setWebHook']);
-Route::post('/' . env('TELEGRAM_BOT_TOKEN') . '/webhook', function () {
-
-    $updates = Telegram::getWebhookUpdate();
-    Log::info($updates);
-    $response = Telegram::sendMessage([
-        'chat_id' => '247164112',
-        'text' => 'Чо надо?'
-    ]);
-    return 'ok';
-});
+Route::post('/' . env('TELEGRAM_BOT_TOKEN') . '/webhook', [TelegramController::class, 'getFromBot']);
 
 
 
