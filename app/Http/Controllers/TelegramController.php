@@ -51,7 +51,7 @@ class TelegramController extends Controller
                 'chatId' => $sourceMessage['channel_post']['sender_chat']['id'],
                 'text' => $sourceMessage['channel_post']['text'],
             ];
-        } elseif (isset($updates['callback_query'])) {
+        } elseif (isset($sourceMessage['callback_query'])) {
             $preparedMessage = [
                 'type' => 'button',
                 //'chatId' => $sourceMessage['channel_post']['sender_chat']['id'],
