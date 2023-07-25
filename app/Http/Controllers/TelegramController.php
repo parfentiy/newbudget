@@ -61,7 +61,7 @@ class TelegramController extends Controller
         switch ($text) {
             case '/help':
                 $message = "Нужна помощь?";
-                $reply_markup = json_encode([]);
+                $reply_markup = json_encode(['inline_keyboard' => [] ]);
                 break;
             default:
                 $message = "Вот кнопки";
@@ -72,11 +72,11 @@ class TelegramController extends Controller
                             [
                                 [
                                     'text' => 'Button 1',
-                                    'callback_data' => 'test_2',
+                                    'callback_data' => 'button1',
                                 ],
                                 [
                                     'text' => 'Button 2',
-                                    'callback_data' => 'test_2',
+                                    'callback_data' => 'button2',
                                 ],
                             ]
                         ],
