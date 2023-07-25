@@ -31,59 +31,68 @@ class TelegramController extends Controller
 
         Log::info('Message: ' . $updates->message);
 
-        //$preparedMessage = $this->prepareMessage($updates);
-        //$this->mainLogic($preparedMessage);
+        $preparedMessage = $this->prepareMessage($updates);
+        $this->mainLogic($preparedMessage);
 
         return 'ok';
     }
 
     private function prepareMessage($sourceMessage)
     {
-        if (isset($updates['message'])) {
-            Log::info('Принято сообщение от ' . $updates['message']['from']['id'] . ': ' . $updates['message']['text']);
-
-            $this->mainLogic($updates['message']['text'], $updates['message']['from']['id']);
-        } elseif (isset($updates['channel_post'])) {
-
-            Log::info('Принято сообщение от ' . $updates['channel_post']['sender_chat']['id'] . ': ' .
-                $updates['channel_post']['text']);
-
-            $this->mainLogic($updates['channel_post']['text'], $updates['channel_post']['sender_chat']['id']);
+        if (isset($sourceMessage['message'])) {
+            $preparedMessage = [
+                'type' => 'textFromUser',
+                'chatId' => $sourceMessage['message']['from']['id'],
+                'text' => $sourceMessage['message']['text'],
+            ];
+        } elseif (isset($sourceMessage['channel_post'])) {
+            $preparedMessage = [
+                'type' => 'textFromChannel',
+                'chatId' => $sourceMessage['channel_post']['sender_chat']['id'],
+                'text' => $sourceMessage['channel_post']['text'],
+            ];
         } elseif (isset($updates['callback_query'])) {
-
+            $preparedMessage = [
+                'type' => 'button',
+                //'chatId' => $sourceMessage['channel_post']['sender_chat']['id'],
+                //'text' => $sourceMessage['channel_post']['text'],
+            ];
         } else {
             Log::info('Wrong message');
         }
+
+        return $preparedMessage;
     }
 
-    private function mainLogic($text, $chatId) {
-        switch ($text) {
-            case '/help':
-                $message = "Нужна помощь?";
-                $reply_markup = json_encode(['inline_keyboard' => [] ]);
-                break;
-            default:
-                $message = "Вот кнопки";
-                $reply_markup = json_encode(
-                    [
-                        'inline_keyboard' =>
+    private function mainLogic($messageArray) {
+        if ($messageArray['type'] === 'textFromUser' || $messageArray['type'] === 'textFromChannel') {
+            switch ($messageArray['text']) {
+                case '/help':
+                    $message = "Нужна помощь?";
+                    $reply_markup = json_encode(['inline_keyboard' => []]);
+                    break;
+                default:
+                    $message = "Вот кнопки";
+                    $reply_markup = json_encode(
                         [
-                            [
+                            'inline_keyboard' =>
                                 [
-                                    'text' => 'Button 1',
-                                    'callback_data' => 'button1',
+                                    [
+                                        [
+                                            'text' => 'Button 1',
+                                            'callback_data' => 'button1',
+                                        ],
+                                        [
+                                            'text' => 'Button 2',
+                                            'callback_data' => 'button2',
+                                        ],
+                                    ]
                                 ],
-                                [
-                                    'text' => 'Button 2',
-                                    'callback_data' => 'button2',
-                                ],
-                            ]
-                        ],
-                    ]
-                );
+                        ]
+                    );
 
+            }
         }
-
         $response = Telegram::sendMessage([
             'chat_id' => $chatId,
             'text' => $message,
