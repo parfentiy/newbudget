@@ -35,20 +35,20 @@ class TelegramController extends Controller
         $updates = Telegram::getWebhookUpdate();
         Log::info($updates);
 
-        die();
+        //die();
         if (isset($updates['message'])) {
-            $response = Telegram::sendMessage([
+            /*$response = Telegram::sendMessage([
                 'chat_id' => $updates['message']['from']['id'],
                 'text' => 'Вы писали: ' . $updates['message']['text'],
-            ]);
+            ]);*/
             Log::info('Принято сообщение от ' . $updates['message']['from']['id'] . ': ' . $updates['message']['text']);
 
             $this->mainLogic($updates['message']['text'], $updates['message']['from']['id']);
         } elseif (isset($updates['channel_post'])) {
-            $response = Telegram::sendMessage([
+            /*$response = Telegram::sendMessage([
                 'chat_id' => $updates['channel_post']['sender_chat']['id'],
                 'text' => 'Вы писали: ' . $updates['channel_post']['text'],
-            ]);
+            ]);*/
             Log::info('Принято сообщение от ' . $updates['channel_post']['sender_chat']['id'] . ': ' .
                 $updates['channel_post']['text']);
 
@@ -73,8 +73,8 @@ class TelegramController extends Controller
         }
 
         $response = Telegram::sendMessage([
-            'chat_id' => $message,
-            'text' => $chatId,
+            'chat_id' => $chatId,
+            'text' => $message,
         ]);
     }
 
