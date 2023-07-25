@@ -33,23 +33,42 @@ class TelegramController extends Controller
 
     public function getFromBot() {
         $updates = Telegram::getWebhookUpdate();
-        Log::info($updates);
+        //Log::info($updates);
         if (isset($updates['message'])) {
             $response = Telegram::sendMessage([
                 'chat_id' => $updates['message']['from']['id'],
                 'text' => 'Вы писали: ' . $updates['message']['text'],
             ]);
+            Log::info('Принято сообщение от ' . $updates['message']['from']['id'] . ': ' . $updates['message']['text']);
         } elseif (isset($updates['channel_post'])) {
             $response = Telegram::sendMessage([
                 'chat_id' => $updates['channel_post']['sender_chat']['id'],
                 'text' => 'Вы писали: ' . $updates['channel_post']['text'],
             ]);
+            Log::info('Принято сообщение от ' . $updates['message']['from']['id'] . ': ' . $updates['message']['text']);
         } else {
             Log::info('Wrong message');
         }
 
+        $this->mainLogic($updates['message']['text'], $updates['message']['from']['id']);
 
         return 'ok';
+    }
+
+    private function mainLogic($text, $chatId) {
+        switch ($text) {
+            case '/help':
+                $message = "Нужна помощь?";
+                break;
+            default:
+                $message = "Вот кнопки"ж
+
+        }
+
+        $response = Telegram::sendMessage([
+            'chat_id' => $message,
+            'text' => $chatId,
+        ]);
     }
 
     public function setWebHook() {
@@ -58,7 +77,7 @@ class TelegramController extends Controller
         return;
     }
 
-    public function get_data_from_tg(){
+    /*public function get_data_from_tg(){
         $content = file_get_contents("php://input");
         $data = json_decode($content, true);
 
@@ -104,5 +123,5 @@ class TelegramController extends Controller
         curl_close($handle);
         return ( json_decode($result,1) ? json_decode($result,1) :
             $result);
-    }
+    }*/
 }
