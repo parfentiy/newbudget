@@ -66,15 +66,32 @@ class TelegramController extends Controller
         switch ($text) {
             case '/help':
                 $message = "Нужна помощь?";
+                $reply_markup = [];
                 break;
             default:
                 $message = "Вот кнопки";
+                $reply_markup =
+                    [
+                        [
+                            [
+                                [
+                                    'text' => 'Button 1',
+                                    'callback_data' => 'test_2',
+                                ],
+                                [
+                                    'text' => 'Button 2',
+                                    'callback_data' => 'test_2',
+                                ],
+                            ]
+                        ],
+                    ];
 
         }
 
         $response = Telegram::sendMessage([
             'chat_id' => $chatId,
             'text' => $message,
+            'inline_keyboard' => json_encode($reply_markup),
         ]);
     }
 
