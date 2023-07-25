@@ -31,7 +31,7 @@ Route::get('/', function () {
 
 Route::get('/tbot', [TelegramController::class, 'getMe']);
 Route::get('/tbot/send', [TelegramController::class, 'send']);
-Route::post('/tbot/setwebhook', [TelegramController::class, 'setWebHook']);
+Route::get('/tbot/setwebhook', [TelegramController::class, 'setWebHook']);
 Route::post('/' . env('TELEGRAM_BOT_TOKEN') . '/webhook', [TelegramController::class, 'getFromBot']);
 
 
