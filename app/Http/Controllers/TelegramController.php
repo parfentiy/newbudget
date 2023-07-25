@@ -92,10 +92,26 @@ class TelegramController extends Controller
                     );
 
             }
+        } elseif ($messageArray['type'] === 'button') {
+            switch ($messageArray['text']) {
+                case 'button1':
+                    $message = "Нажата кнопка1";
+                    $reply_markup = json_encode(['inline_keyboard' => []]);
+                    break;
+                case 'button2':
+                    $message = "Нажата кнопка2";
+                    $reply_markup = json_encode(['inline_keyboard' => []]);
+                    break;
+                default:
+                    $message = "Хер пойми что нажато";
+                    $reply_markup = json_encode(['inline_keyboard' => []]);
+                    break;
+
+            }
         }
         $response = Telegram::sendMessage([
             'chat_id' => $messageArray['chatId'],
-            'text' => $messageArray['text'],
+            'text' => $message,
             'reply_markup' => $reply_markup,
         ]);
     }
