@@ -95,7 +95,7 @@ class TelegramController extends Controller
         }
         $response = Telegram::sendMessage([
             'chat_id' => $messageArray['chatId'],
-            'text' => $message,
+            'text' => $messageArray['text'],
             'reply_markup' => $reply_markup,
         ]);
     }
