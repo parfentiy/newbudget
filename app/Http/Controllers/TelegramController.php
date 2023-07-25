@@ -33,7 +33,7 @@ class TelegramController extends Controller
 
     public function getFromBot() {
         $updates = Telegram::getWebhookUpdate();
-        //Log::info($updates);
+        Log::info($updates);
         if (isset($updates['message'])) {
             $response = Telegram::sendMessage([
                 'chat_id' => $updates['message']['from']['id'],
@@ -55,7 +55,7 @@ class TelegramController extends Controller
             Log::info('Wrong message');
         }
 
-        $this->mainLogic($updates['message']['text'], $updates['message']['from']['id']);
+        //$this->mainLogic($updates['message']['text'], $updates['message']['from']['id']);
 
         return 'ok';
     }
