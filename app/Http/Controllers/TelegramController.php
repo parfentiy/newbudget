@@ -61,7 +61,7 @@ class TelegramController extends Controller
                 $message = "Нужна помощь?";
                 break;
             default:
-                $message = "Вот кнопки"ж
+                $message = "Вот кнопки";
 
         }
 
