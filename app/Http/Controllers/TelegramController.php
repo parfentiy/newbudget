@@ -31,7 +31,12 @@ class TelegramController extends Controller
             $response = Telegram::sendMessage([
                 'chat_id' => $updates['message']['from']['id'],
                 'text' => 'Вы писали: ' . $updates['message']['text'],
-        ]);
+            ]);
+        } elseif (isset($updates['channel_post'])) {
+            $response = Telegram::sendMessage([
+                'chat_id' => $updates['channel_post']['sender_chat']['id'],
+                'text' => 'Вы писали: ' . $updates['channel_post']['text'],
+            ]);
         } else {
             Log::info('Wrong message');
         }
