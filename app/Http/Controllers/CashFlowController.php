@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\TelegrammController;
+use App\Http\Controllers\TelegramController;
 use Illuminate\Http\Request;
 use \App\Models\Account;
 use \App\Models\CashFlow;
@@ -29,7 +29,7 @@ class CashFlowController extends Controller
             " -> " . Account::find(request()->dest_account_id)->name . "\n" .
             "на " . request()->amount . " рублей.\n" .
             "Комментарий к расходу: " . request()->description . "\n";
-        TelegrammController::send($message);
+        (new TelegramController)->send($message);
 
         CashFlow::create([
             'amount' => request()->amount,
@@ -51,7 +51,7 @@ class CashFlowController extends Controller
             " -> " . Account::find($transaction->dest_account_id)->name . "\n" .
             "на " . $transaction->amount . " рублей.\n" .
             "Комментарий к расходу: " . $transaction->description . "\n";
-        TelegrammController::send($message);
+        (new TelegramController)->send($message);
 
         CashFlow::find(request()->id)->delete();
 
