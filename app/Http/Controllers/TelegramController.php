@@ -34,6 +34,8 @@ class TelegramController extends Controller
     public function getFromBot() {
         $updates = Telegram::getWebhookUpdate();
         Log::info($updates);
+
+        die();
         if (isset($updates['message'])) {
             $response = Telegram::sendMessage([
                 'chat_id' => $updates['message']['from']['id'],
