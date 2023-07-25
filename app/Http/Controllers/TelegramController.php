@@ -10,12 +10,6 @@ use Illuminate\Http\Request;
 
 class TelegramController extends Controller
 {
-    public function getMe() {
-        $response = Telegram::bot('mybot')->getMe();
-        Log::info($response);
-        return;
-    }
-
     public function send($message) {
         $userSetting = Setting::where('user_id', Auth::user()->id)->first();
         if ($userSetting->is_tbot_active) {
@@ -35,7 +29,16 @@ class TelegramController extends Controller
         $updates = Telegram::getWebhookUpdate();
         Log::info($updates);
 
-        //die();
+        Log::info('Message: ' . $updates->message);
+
+        //$preparedMessage = $this->prepareMessage($updates);
+        //$this->mainLogic($preparedMessage);
+
+        return 'ok';
+    }
+
+    private function prepareMessage($sourceMessage)
+    {
         if (isset($updates['message'])) {
             Log::info('Принято сообщение от ' . $updates['message']['from']['id'] . ': ' . $updates['message']['text']);
 
@@ -51,10 +54,6 @@ class TelegramController extends Controller
         } else {
             Log::info('Wrong message');
         }
-
-        //$this->mainLogic($updates['message']['text'], $updates['message']['from']['id']);
-
-        return 'ok';
     }
 
     private function mainLogic($text, $chatId) {
@@ -94,6 +93,12 @@ class TelegramController extends Controller
 
     public function setWebHook() {
         $response = Telegram::setWebhook(['url' => env('TELEGRAM_WEBHOOK_URL')]);
+        Log::info($response);
+        return;
+    }
+
+    public function getMe() {
+        $response = Telegram::bot('mybot')->getMe();
         Log::info($response);
         return;
     }
