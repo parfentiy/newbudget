@@ -16,21 +16,6 @@ class TelegramController extends Controller
         return;
     }
 
-    public function sendTest() {
-        $userSetting = Setting::where('user_id', Auth::user()->id)->first();
-        if ($userSetting->is_tbot_active) {
-            $idChannel = $userSetting->tbot_channel_id;
-
-            $response = Telegram::sendMessage([
-                'chat_id' => $idChannel,
-                'text' => 'Sent to ' . $idChannel,
-            ]);
-
-            $messageId = $response->getMessageId();
-            Log::info($messageId);
-        }
-    }
-
     public function send($message) {
         $userSetting = Setting::where('user_id', Auth::user()->id)->first();
         if ($userSetting->is_tbot_active) {

@@ -30,9 +30,8 @@ Route::get('/', function () {
 })->middleware(['auth', 'verified'])->name('mainpage');
 
 Route::get('/tbot', [TelegramController::class, 'getMe']);
-Route::get('/tbot/sendTest', [TelegramController::class, 'sendTest']);
 Route::get('/tbot/setwebhook', [TelegramController::class, 'setWebHook']);
-Route::post('/' . env('TELEGRAM_BOT_TOKEN') . '/webhook', [TelegramController::class, 'getFromBot']);
+Route::post('/webhook', [TelegramController::class, 'getFromBot']);
 
 
 
