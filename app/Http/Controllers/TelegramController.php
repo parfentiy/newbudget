@@ -66,12 +66,13 @@ class TelegramController extends Controller
         switch ($text) {
             case '/help':
                 $message = "Нужна помощь?";
-                $reply_markup = [];
+                $reply_markup = json_encode([]);
                 break;
             default:
                 $message = "Вот кнопки";
-                $reply_markup =
+                $reply_markup = json_encode(
                     [
+                        'inline_keyboard' =>
                         [
                             [
                                 [
@@ -84,14 +85,15 @@ class TelegramController extends Controller
                                 ],
                             ]
                         ],
-                    ];
+                    ]
+                );
 
         }
 
         $response = Telegram::sendMessage([
             'chat_id' => $chatId,
             'text' => $message,
-            'inline_keyboard' => json_encode($reply_markup),
+            'reply_markup' => json_encode($reply_markup),
         ]);
     }
 
