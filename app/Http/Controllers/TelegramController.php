@@ -54,8 +54,8 @@ class TelegramController extends Controller
         } elseif (isset($sourceMessage['callback_query'])) {
             $preparedMessage = [
                 'type' => 'button',
-                //'chatId' => $sourceMessage['channel_post']['sender_chat']['id'],
-                //'text' => $sourceMessage['channel_post']['text'],
+                'chatId' => $sourceMessage['callback_query']['message']['chat']['id'],
+                'text' => $sourceMessage['callback_query']['data'],
             ];
         } else {
             Log::info('Wrong message');
