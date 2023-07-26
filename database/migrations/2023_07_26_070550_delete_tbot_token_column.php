@@ -12,11 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         //
-        if(Schema::hasColumn('settings','tbot_token')) {
-            Schema::table('settings',function (Blueprint $table) {
-                $table->dropColumn('tbot_token');
-            });
-        }
+        Schema::table('settings',function (Blueprint $table) {
+            $table->dropColumn('tbot_token');
+        });
     }
 
     /**
