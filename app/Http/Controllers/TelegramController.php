@@ -38,7 +38,7 @@ class TelegramController extends Controller
             return 'Restricted';
         });
         Log::info('UserData - ' . $user);
-        if ($user !== 'Restricted') {
+        if ($user === 'Restricted') {
             $response = Telegram::sendMessage([
                 'chat_id' => $preparedMessage['chatId'],
                 'text' => 'Отказано в доступе',
