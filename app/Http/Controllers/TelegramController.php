@@ -32,6 +32,9 @@ class TelegramController extends Controller
         Log::info('Message: ' . $updates->message);
 
         $preparedMessage = $this->prepareMessage($updates);
+        Setting::where('tbot_token', $preparedMessage['chatId'])->firstOr(function () {
+            return 'Restricted';
+        });
         $this->mainLogic($preparedMessage);
 
         return 'ok';
