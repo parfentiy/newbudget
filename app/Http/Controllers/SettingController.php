@@ -17,13 +17,13 @@ class SettingController extends Controller
                 'user_id' => $user,
                 'is_tbot_active' => request()->isTBotActive === 'on' ? true : false,
                 'tbot_channel_id' => request()->tBotChannel,
-                'tbot_token' => request()->tBotToken,
+                'menu_position' => 'root',
             ]);
         } else {
             $currentSetting->user_id = $user;
             $currentSetting->is_tbot_active = request()->isTBotActive === 'on' ? true : false;
             $currentSetting->tbot_channel_id = request()->tBotChannel;
-            $currentSetting->tbot_token = request()->tBotToken;
+            $currentSetting->menu_position = 'root';
 
             $currentSetting->save();
         }

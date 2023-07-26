@@ -10,6 +10,21 @@ use Illuminate\Http\Request;
 
 class TelegramController extends Controller
 {
+    protected $mainMenu = [ 'inline_keyboard' => [[
+                        [
+                            'text' => 'Новая проводка',
+                            'callback_data' => 'newTransaction',
+                        ],
+                        [
+                            'text' => 'Последние проводки',
+                            'callback_data' => 'lastTransactions',
+                        ],
+                        [
+                            'text' => 'Бюджеты в PDF',
+                            'callback_data' => 'budgetsPdf',
+                        ],
+                    ]]];
+
     public function send($message) {
         $userSetting = Setting::where('user_id', Auth::user()->id)->first();
         if ($userSetting->is_tbot_active) {
@@ -27,6 +42,7 @@ class TelegramController extends Controller
 
     public function getFromBot() {
         $updates = Telegram::getWebhookUpdate();
+        Log::info('==============');
         Log::info($updates);
 
         $preparedMessage = $this->prepareMessage($updates);
@@ -80,6 +96,10 @@ class TelegramController extends Controller
     }
 
     private function mainLogic($messageArray) {
+        $user = Setting::where('tbot_channel_id', $messageArray['chatId'])->first();
+        Log::info('Current menu position: ' . $user->menu_position);
+        $menuPosition = $user->menu_position;
+
         if ($messageArray['type'] === 'textFromUser' || $messageArray['type'] === 'textFromChannel') {
             switch ($messageArray['text']) {
                 case '/help':
@@ -88,35 +108,15 @@ class TelegramController extends Controller
                     break;
                 default:
                     $message = "Основное меню";
-                    $reply_markup = json_encode(
-                        [
-                            'inline_keyboard' =>
-                                [
-                                    [
-                                        [
-                                            'text' => 'Новая проводка',
-                                            'callback_data' => 'newTransaction',
-                                        ],
-                                        [
-                                            'text' => 'Последние проводки',
-                                            'callback_data' => 'lastTransactions',
-                                        ],
-                                        [
-                                            'text' => 'Бюджеты в PDF',
-                                            'callback_data' => 'budgetsPdf',
-                                        ],
-
-                                    ]
-                                ],
-                        ]
-                    );
+                    $reply_markup = json_encode($this->mainMenu);
 
             }
         } elseif ($messageArray['type'] === 'button') {
             switch ($messageArray['text']) {
-                case 'button1':
-                    $message = "Нажата кнопка1";
+                case 'lastTransactions':
+                    $message = "Задайте количество последних проводок";
                     $reply_markup = json_encode(['inline_keyboard' => []]);
+                    $menuPosition = '2.1';
                     break;
                 case 'button2':
                     $message = "Нажата кнопка2";
@@ -134,6 +134,9 @@ class TelegramController extends Controller
             'text' => $message,
             'reply_markup' => $reply_markup,
         ]);
+
+        $user->menu_position = $menuPosition;
+        $user->save();
     }
 
     public function setWebHook() {
