@@ -29,13 +29,9 @@
                 </div>
             </div>
             <div class="d-flex flex-column justify-content-start border border-secondary px-3">
-                Канал:
+                Ваш Telegram ID:
                 <x-text-input id="tBotChannel" class="form-control form-control-sm w-auto block mt-1 items-center justify-center" type="text" name="tBotChannel" value="{{$setting['tbot_channel_id']}}" required autofocus autocomplete="tBotChannel" />
                 <x-input-error :messages="$errors->get('tBotChannel')" class="mt-2" />
-            </div>
-            <div class="d-flex flex-column justify-content-start col-2 border border-secondary px-3">
-                <label for="tBotToken" class="form-label">Токен:</label>
-                <textarea class="form-control border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" id="tBotToken" rows="2" name="tBotToken">{{$setting['tbot_token']}}</textarea>
             </div>
         </div>
         <div class="d-flex flex-row justify-content-center">
