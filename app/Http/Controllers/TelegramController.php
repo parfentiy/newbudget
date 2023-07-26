@@ -38,9 +38,17 @@ class TelegramController extends Controller
             return 'Restricted';
         });
         Log::info('UserData - ' . $user);
-        if ($user->is_tbot_active && $user !== 'Restricted') {
-            Log::info('Пользователь ' . $preparedMessage['chatId'] . 'пишет:');
-            $this->mainLogic($preparedMessage);
+        if ($user !== 'Restricted') {
+            $response = Telegram::sendMessage([
+                'chat_id' => $preparedMessage['chatId'],
+                'text' => 'Отказано в доступе',
+            ]);
+        }
+        else {
+            if ($user->is_tbot_active) {
+                Log::info('Пользователь ' . $preparedMessage['chatId'] . ' пишет:');
+                $this->mainLogic($preparedMessage);
+            }
         }
 
         return 'ok';
