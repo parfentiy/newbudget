@@ -34,6 +34,7 @@ class TelegramController extends Controller
         $preparedMessage = $this->prepareMessage($updates);
         $user = Setting::where('tbot_token', $preparedMessage['chatId'])->firstOr(function () {
             Log::info('Пользователь не существует');
+            die();
             return 'Restricted';
         });
 
