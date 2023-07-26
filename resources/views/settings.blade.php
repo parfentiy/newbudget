@@ -33,6 +33,10 @@
                 <x-text-input id="tBotChannel" class="form-control form-control-sm w-auto block mt-1 items-center justify-center" type="text" name="tBotChannel" value="{{$setting['tbot_channel_id']}}" required autofocus autocomplete="tBotChannel" />
                 <x-input-error :messages="$errors->get('tBotChannel')" class="mt-2" />
             </div>
+            <div class="d-flex flex-column justify-content-start px-3">
+                <p>Получить Ваш Telegram ID - <a href="https://t.me/getmyid_bot">https://t.me/getmyid_bot</a></p>
+                <p>Ссылка на бот Бюджета <a href="https://t.me/XammepBudgetBot">https://t.me/XammepBudgetBot</a></p>
+            </div>
         </div>
         <div class="d-flex flex-row justify-content-center">
 
