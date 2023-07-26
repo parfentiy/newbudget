@@ -29,15 +29,13 @@ class TelegramController extends Controller
         $updates = Telegram::getWebhookUpdate();
         Log::info($updates);
 
-        Log::info('Message: ' . $updates->message);
-
         $preparedMessage = $this->prepareMessage($updates);
         $user = Setting::where('tbot_channel_id', $preparedMessage['chatId'])->firstOr(function () {
             Log::info('Пользователь не существует');
 
             return 'Restricted';
         });
-        Log::info('UserData - ' . $user);
+        //Log::info('UserData - ' . $user);
         if ($user === 'Restricted') {
             $response = Telegram::sendMessage([
                 'chat_id' => $preparedMessage['chatId'],
@@ -89,20 +87,25 @@ class TelegramController extends Controller
                     $reply_markup = json_encode(['inline_keyboard' => []]);
                     break;
                 default:
-                    $message = "Вот кнопки";
+                    $message = "Основное меню";
                     $reply_markup = json_encode(
                         [
                             'inline_keyboard' =>
                                 [
                                     [
                                         [
-                                            'text' => 'Button 1',
-                                            'callback_data' => 'button1',
+                                            'text' => 'Новая проводка',
+                                            'callback_data' => 'newTransaction',
                                         ],
                                         [
-                                            'text' => 'Button 2',
-                                            'callback_data' => 'button2',
+                                            'text' => 'Последние проводки',
+                                            'callback_data' => 'lastTransactions',
                                         ],
+                                        [
+                                            'text' => 'Бюджеты в PDF',
+                                            'callback_data' => 'budgetsPdf',
+                                        ],
+
                                     ]
                                 ],
                         ]
