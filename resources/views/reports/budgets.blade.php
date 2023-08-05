@@ -26,6 +26,7 @@
         }
         $currentBudgetIncomes = \App\Models\CashFlow::where('user_id', Auth::user()->id)
                                         ->whereIn('source_account_id', $currentIncomeAccounts)
+                                        ->whereIn('dest_account_id', $currentBudgetItems)
                                         ->whereMonth('operation_date', $currentBudget['month'])
                                         ->whereYear('operation_date', $currentBudget['year'])
                                         ->get();
