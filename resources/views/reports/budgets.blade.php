@@ -24,9 +24,13 @@
         foreach (json_decode(\App\Models\PlanBudget::whereId($budgetId)->pluck('incomes')->first(), true) as $item) {
             $currentIncomeAccounts[] = $item['account'];
         }
+        $currentBudgetAccounts = [];
+        foreach ($currentBudgetItems as $item) {
+            $currentBudgetAccounts[] = $item['account'];
+        }
         $currentBudgetIncomes = \App\Models\CashFlow::where('user_id', Auth::user()->id)
                                         ->whereIn('source_account_id', $currentIncomeAccounts)
-                                        ->whereIn('dest_account_id', $currentBudgetItems)
+                                        ->whereIn('dest_account_id', $currentBudgetAccounts)
                                         ->whereMonth('operation_date', $currentBudget['month'])
                                         ->whereYear('operation_date', $currentBudget['year'])
                                         ->get();
