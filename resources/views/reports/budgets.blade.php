@@ -228,6 +228,10 @@
                         <td>Остаток по плану</td>
                         <td class="text-right">{{$total - $totalPlan}} р.</td>
                     </tr>
+                    <tr>
+                        <td>Остаток по факту</td>
+                        <td class="text-right">{{$total - $totalWasted}} р.</td>
+                    </tr>
                 </table>
             </div>
 
