@@ -1,10 +1,16 @@
+<<<<<<< HEAD
 /.phpunit.cache
+=======
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
 /node_modules
 /public/build
 /public/hot
 /public/storage
+<<<<<<< HEAD
 /database/*.sqlite
 
+=======
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
 /storage/*.key
 /vendor
 .env

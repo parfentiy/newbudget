@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+<<<<<<< HEAD
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -60,4 +61,22 @@ class User extends Authenticatable
     {
         return $this->hasMany(Account::class);
     }
+=======
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+
+
+class User extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'email',
+        'name',
+        'password',
+        'remember_token',
+    ];
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
 }

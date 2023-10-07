@@ -1,6 +1,7 @@
 {
     "name": "laravel/laravel",
     "type": "project",
+<<<<<<< HEAD
     "description": "The skeleton application for the Laravel framework.",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
@@ -23,6 +24,34 @@
         "phpunit/phpunit": "^10.1",
         "spatie/laravel-ignition": "^2.0",
         "squizlabs/php_codesniffer": "^3.7"
+=======
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.0.2",
+        "barryvdh/laravel-dompdf": "^2.0",
+        "dompdf/dompdf": "^2.0",
+        "guzzlehttp/guzzle": "^7.2",
+        "jenssegers/agent": "^2.6",
+        "laravel/framework": "^9.19",
+        "laravel/sanctum": "^3.0",
+        "laravel/tinker": "^2.7",
+        "laravel/ui": "^4.1",
+        "mpdf/mpdf": "^6.1",
+        "nyholm/psr7": "^1.5",
+        "symfony/psr-http-message-bridge": "^2.1"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.9.1",
+        "laravel/breeze": "^1.15",
+        "laravel/pint": "^1.0",
+        "laravel/sail": "^1.0.1",
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^6.1",
+        "phpunit/phpunit": "^9.5.10",
+        "spatie/laravel-ignition": "^1.0"
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
     },
     "autoload": {
         "psr-4": {
@@ -61,10 +90,17 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
+<<<<<<< HEAD
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
         }
     },
     "minimum-stability": "stable",
+=======
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
     "prefer-stable": true
 }

@@ -13,8 +13,15 @@ class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
+<<<<<<< HEAD
      */
     public function authorize(): bool
+=======
+     *
+     * @return bool
+     */
+    public function authorize()
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
     {
         return true;
     }
@@ -22,9 +29,15 @@ class LoginRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
+<<<<<<< HEAD
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
     public function rules(): array
+=======
+     * @return array
+     */
+    public function rules()
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
     {
         return [
             'email' => ['required', 'string', 'email'],
@@ -35,9 +48,17 @@ class LoginRequest extends FormRequest
     /**
      * Attempt to authenticate the request's credentials.
      *
+<<<<<<< HEAD
      * @throws \Illuminate\Validation\ValidationException
      */
     public function authenticate(): void
+=======
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function authenticate()
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
     {
         $this->ensureIsNotRateLimited();
 
@@ -55,9 +76,17 @@ class LoginRequest extends FormRequest
     /**
      * Ensure the login request is not rate limited.
      *
+<<<<<<< HEAD
      * @throws \Illuminate\Validation\ValidationException
      */
     public function ensureIsNotRateLimited(): void
+=======
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function ensureIsNotRateLimited()
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
     {
         if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
@@ -77,9 +106,18 @@ class LoginRequest extends FormRequest
 
     /**
      * Get the rate limiting throttle key for the request.
+<<<<<<< HEAD
      */
     public function throttleKey(): string
     {
         return Str::transliterate(Str::lower($this->input('email')) . '|' . $this->ip());
+=======
+     *
+     * @return string
+     */
+    public function throttleKey()
+    {
+        return Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+<<<<<<< HEAD
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CashFlowController;
 use App\Http\Controllers\ReportsController;
@@ -13,6 +14,16 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\TelegramController;
 use Telegram\Bot\Laravel\Facades\Telegram;
 use App\Models\Setting;
+=======
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExpensesController;
+use App\Http\Controllers\IncomesController;
+use App\Http\Controllers\PlanBudgetController;
+use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\ExpensesTypeController;
+use App\Http\Controllers\IncomesTypeController;
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +31,19 @@ use App\Models\Setting;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
+<<<<<<< HEAD
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
+=======
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
 |
 */
 
 Route::get('/', function () {
     return view('mainpage');
+<<<<<<< HEAD
 })->middleware(['auth', 'verified'])->name('mainpage');
 
 Route::get('/tbot', [TelegramController::class, 'getMe']);
@@ -34,11 +51,69 @@ Route::get('/tbot/setwebhook', [TelegramController::class, 'setWebHook']);
 Route::post('/webhook', [TelegramController::class, 'getFromBot']);
 
 
+=======
+});
+Route::get('/mainpage', function () {
+    return view('mainpage');
+})->name('mainpage');
+
+Route::post('/add/expense', function () {
+    return view('addexpense');
+})->name('addexpense');
+Route::post('/add/expensesave', [ExpensesController::class, 'addNewExpense']);
+Route::post('/delete/expense', [ExpensesController::class, 'deleteExpense']);
+
+Route::post('/add/income', function () {
+    return view('addincome');
+})->name('addincome');
+Route::post('/add/incomesave', [IncomesController::class, 'addNewIncome']);
+Route::post('/delete/income', [IncomesController::class, 'deleteIncome']);
+
+Route::post('/planning', function () {
+    return view('planningform');
+})->name('planning');
+Route::post('/planning/edit', [PlanBudgetController::class, 'budgetEdit']);
+Route::post('/planning/save/{year}/{month}', [PlanBudgetController::class, 'budgetSave'])->name('planningsave');
+Route::post('/planning/create/{year}/{month}', [PlanBudgetController::class, 'budgetCreate'])->name('planningcreate');
+Route::post('/planning/delete', [PlanBudgetController::class, 'budgetDelete'])->name('planningdelete');
+
+Route::post('/add/expensetype', function () {
+    return view('addexpensetype');
+})->name('addexpensetype');
+Route::post('/add/newexpensetype', [ExpensesTypeController::class, 'addNewExpenseType']);
+
+Route::post('/add/incometype', function () {
+    return view('addincometype');
+})->name('addincometype');
+Route::post('/add/newincometype', [IncomesTypeController::class, 'addNewIncomeType']);
+
+Route::post('/reportslist', function () {
+    return view('reportslist');
+})->name('reportslist');
+Route::get('/reports/currentexpenses', [ReportsController::class, 'showCurrentExpenses']);
+Route::post('/reports/currentexpenses', [ReportsController::class, 'showCurrentExpenses']);
+Route::get('/reports/currentincomes', [ReportsController::class, 'showCurrentIncomes']);
+Route::post('/reports/currentincomes', [ReportsController::class, 'showCurrentIncomes']);
+Route::get('/reports/currentbudget', [ReportsController::class, 'showCurrentBudget']);
+Route::get('/pdf/currentbudget', [PdfController::class, 'showCurrentBudget']);
+Route::get('/reports/otherbudget', function () {
+    return view('otherbudgetform');
+});
+Route::post('/reports/showotherbudgets', [ReportsController::class, 'showCurrentBudget']);
+
+Route::post('/note/update/{month}/{year}', [PlanBudgetController::class, 'noteUpdate']);
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+<<<<<<< HEAD
     Route::get('/dashboard', function () {
         return view('dashboard');
     });
@@ -101,3 +176,24 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+=======
+});
+
+require __DIR__.'/auth.php';
+
+// изменил в budget3
+// и еще чуть
+
+// для очистки БД и сброса индексов
+
+/*Route::get('/truncate', function () {
+  DB::table('incomes')->truncate();
+  DB::table('expenses')->truncate();
+  DB::table('expensestypes')->truncate();
+  DB::table('incomes_types')->truncate();
+  DB::table('plan_budgets')->truncate();
+  DB::table('users')->truncate();
+  DB::table('budget_notes')->truncate();
+  die();
+  });*/
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27

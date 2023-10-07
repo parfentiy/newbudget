@@ -12,11 +12,19 @@
             <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
     </testsuites>
+<<<<<<< HEAD
     <source>
         <include>
             <directory suffix=".php">./app</directory>
         </include>
     </source>
+=======
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">./app</directory>
+        </include>
+    </coverage>
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="BCRYPT_ROUNDS" value="4"/>

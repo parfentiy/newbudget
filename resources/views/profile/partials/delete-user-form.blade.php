@@ -19,23 +19,35 @@
             @csrf
             @method('delete')
 
+<<<<<<< HEAD
             <h2 class="text-lg font-medium text-gray-900">
                 {{ __('Are you sure you want to delete your account?') }}
             </h2>
+=======
+            <h2 class="text-lg font-medium text-gray-900">Are you sure your want to delete your account?</h2>
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
 
             <p class="mt-1 text-sm text-gray-600">
                 {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
             </p>
 
             <div class="mt-6">
+<<<<<<< HEAD
                 <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
+=======
+                <x-input-label for="password" value="Password" class="sr-only" />
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
 
                 <x-text-input
                     id="password"
                     name="password"
                     type="password"
                     class="mt-1 block w-3/4"
+<<<<<<< HEAD
                     placeholder="{{ __('Password') }}"
+=======
+                    placeholder="Password"
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
                 />
 
                 <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />

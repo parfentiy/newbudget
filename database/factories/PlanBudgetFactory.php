@@ -2,10 +2,14 @@
 
 namespace Database\Factories;
 
+<<<<<<< HEAD
 use App\Models\Account;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+=======
+use Illuminate\Database\Eloquent\Factories\Factory;
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PlanBudget>
@@ -17,6 +21,7 @@ class PlanBudgetFactory extends Factory
      *
      * @return array<string, mixed>
      */
+<<<<<<< HEAD
     public function definition(): array
     {
         $categories = Account::where('user_id', 2)->where('category', '!=', '0')->pluck('id');
@@ -46,6 +51,12 @@ class PlanBudgetFactory extends Factory
             'description' => fake()->sentence,
             'dataset' => json_encode($dataset),
             'incomes' => json_encode($incomes),
+=======
+    public function definition()
+    {
+        return [
+            //
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
         ];
     }
 }

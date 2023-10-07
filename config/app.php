@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
+<<<<<<< HEAD
 use Illuminate\Support\ServiceProvider;
+=======
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
 
 return [
 
@@ -155,7 +158,38 @@ return [
     |
     */
 
+<<<<<<< HEAD
     'providers' => ServiceProvider::defaultProviders()->merge([
+=======
+    'providers' => [
+
+        /*
+         * Laravel Framework Service Providers...
+         */
+        Illuminate\Auth\AuthServiceProvider::class,
+        Illuminate\Broadcasting\BroadcastServiceProvider::class,
+        Illuminate\Bus\BusServiceProvider::class,
+        Illuminate\Cache\CacheServiceProvider::class,
+        Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
+        Illuminate\Cookie\CookieServiceProvider::class,
+        Illuminate\Database\DatabaseServiceProvider::class,
+        Illuminate\Encryption\EncryptionServiceProvider::class,
+        Illuminate\Filesystem\FilesystemServiceProvider::class,
+        Illuminate\Foundation\Providers\FoundationServiceProvider::class,
+        Illuminate\Hashing\HashServiceProvider::class,
+        Illuminate\Mail\MailServiceProvider::class,
+        Illuminate\Notifications\NotificationServiceProvider::class,
+        Illuminate\Pagination\PaginationServiceProvider::class,
+        Illuminate\Pipeline\PipelineServiceProvider::class,
+        Illuminate\Queue\QueueServiceProvider::class,
+        Illuminate\Redis\RedisServiceProvider::class,
+        Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
+        Illuminate\Session\SessionServiceProvider::class,
+        Illuminate\Translation\TranslationServiceProvider::class,
+        Illuminate\Validation\ValidationServiceProvider::class,
+        Illuminate\View\ViewServiceProvider::class,
+
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
         /*
          * Package Service Providers...
          */
@@ -168,7 +202,12 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+<<<<<<< HEAD
     ])->toArray(),
+=======
+
+    ],
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
 
     /*
     |--------------------------------------------------------------------------
@@ -182,7 +221,11 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+<<<<<<< HEAD
         // 'Example' => App\Facades\Example::class,
+=======
+        // 'ExampleClass' => App\Example\ExampleClass::class,
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
     ])->toArray(),
 
 ];

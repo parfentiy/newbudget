@@ -11,12 +11,17 @@ use Illuminate\Support\Facades\Route;
 class RouteServiceProvider extends ServiceProvider
 {
     /**
+<<<<<<< HEAD
      * The path to your application's "home" route.
+=======
+     * The path to the "home" route for your application.
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
      *
      * Typically, users are redirected here after authentication.
      *
      * @var string
      */
+<<<<<<< HEAD
     public const HOME = '/';
 
     /**
@@ -27,6 +32,18 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
+=======
+    public const HOME = '/dashboard';
+
+    /**
+     * Define your route model bindings, pattern filters, and other route configuration.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->configureRateLimiting();
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
 
         $this->routes(function () {
             Route::middleware('api')
@@ -37,4 +54,19 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Configure the rate limiters for the application.
+     *
+     * @return void
+     */
+    protected function configureRateLimiting()
+    {
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+        });
+    }
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
 }

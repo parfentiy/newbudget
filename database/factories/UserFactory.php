@@ -15,7 +15,11 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+<<<<<<< HEAD
     public function definition(): array
+=======
+    public function definition()
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
     {
         return [
             'name' => fake()->name(),
@@ -28,8 +32,15 @@ class UserFactory extends Factory
 
     /**
      * Indicate that the model's email address should be unverified.
+<<<<<<< HEAD
      */
     public function unverified(): static
+=======
+     *
+     * @return static
+     */
+    public function unverified()
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,

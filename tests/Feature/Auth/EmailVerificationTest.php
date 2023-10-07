@@ -14,7 +14,11 @@ class EmailVerificationTest extends TestCase
 {
     use RefreshDatabase;
 
+<<<<<<< HEAD
     public function test_email_verification_screen_can_be_rendered(): void
+=======
+    public function test_email_verification_screen_can_be_rendered()
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
     {
         $user = User::factory()->create([
             'email_verified_at' => null,
@@ -25,7 +29,11 @@ class EmailVerificationTest extends TestCase
         $response->assertStatus(200);
     }
 
+<<<<<<< HEAD
     public function test_email_can_be_verified(): void
+=======
+    public function test_email_can_be_verified()
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
     {
         $user = User::factory()->create([
             'email_verified_at' => null,
@@ -46,7 +54,11 @@ class EmailVerificationTest extends TestCase
         $response->assertRedirect(RouteServiceProvider::HOME.'?verified=1');
     }
 
+<<<<<<< HEAD
     public function test_email_is_not_verified_with_invalid_hash(): void
+=======
+    public function test_email_is_not_verified_with_invalid_hash()
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
     {
         $user = User::factory()->create([
             'email_verified_at' => null,

@@ -3,12 +3,22 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+<<<<<<< HEAD
 use Illuminate\Database\Seeder;
+=======
+use App\Models\PlanBudget;
+use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\expenses;
+use App\Models\ExpensesType;
+use App\Models\IncomesType;
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
 
 class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
+<<<<<<< HEAD
      */
     public function run(): void
     {
@@ -116,4 +126,15 @@ class DatabaseSeeder extends Seeder
         \App\Models\CashFlow::factory(50)->create();
         \App\Models\PlanBudget::factory(10)->create();
     }
+=======
+     *
+     * @return void
+     */
+    public function run()
+    {
+
+
+    }
+
+>>>>>>> 1e03a7501220e7f7749dc0dc3d824ac3c6af1b27
 }
